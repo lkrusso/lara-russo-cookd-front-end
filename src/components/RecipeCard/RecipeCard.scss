@@ -1,0 +1,52 @@
+@use "../../styles/partials/variables" as *;
+
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.recipe {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: $cookd-cream;
+  padding: 1rem;
+  width: 20rem;
+  height: fit-content;
+  &__image {
+    margin: 0.5rem, 0;
+    border-radius: 1rem;
+  }
+  &__details {
+    border: 1px solid black;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+  }
+  &__further-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__ingredients,
+  &__instructions {
+    border: 1px solid black;
+    border-radius: 1rem;
+    width: 45%;
+    margin: 0.25rem;
+  }
+  &__info {
+    margin: 0;
+  }
+  &__name,
+  &__duration,
+  &__serve,
+  &__review,
+  &__comments {
+    margin: 0.5rem 0;
+  }
+}
