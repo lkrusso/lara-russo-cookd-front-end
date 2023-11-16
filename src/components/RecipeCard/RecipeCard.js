@@ -1,3 +1,4 @@
+import RecipeInstructions from "../RecipeInstructions/RecipeInstructions";
 import "./RecipeCard.scss";
 
 function RecipeCard({ recipe }) {
@@ -20,12 +21,9 @@ function RecipeCard({ recipe }) {
             <li>Ingredient one</li>
             <li>Ingredient two</li>
           </ul>
-          <ol className="recipe__instructions">
-            {" "}
-            Instructions:
-            <li>Instruction one</li>
-            <li>Instruction two</li>
-          </ol>
+          <RecipeInstructions
+            instructions={["Instruction one", "Instruction two"]}
+          />
         </div>
       </section>
       <section className="recipe__info">
