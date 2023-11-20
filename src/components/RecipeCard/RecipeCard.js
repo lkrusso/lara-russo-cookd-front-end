@@ -14,7 +14,6 @@ function RecipeCard() {
         const { data } = await axios.post("http://localhost:5050/api/recipes", {
           id: selectedUserID,
         });
-        console.log(data);
         setRecipes(data);
         setIsError(false);
       } catch (error) {
