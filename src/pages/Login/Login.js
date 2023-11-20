@@ -1,7 +1,6 @@
 import "./Login.scss";
 import axios from "axios";
 import { useState } from "react";
-import Input from "../../components/Input/Input";
 import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
@@ -12,10 +11,13 @@ function Login() {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5050/auth/login", {
-        username: event.target.username.value,
-        password: event.target.password.value,
-      });
+      const response = await axios.post(
+        "http://localhost:5050/api/auth/login",
+        {
+          username: event.target.username.value,
+          password: event.target.password.value,
+        }
+      );
 
       sessionStorage.setItem("token", response.data.token);
       navigate("/");
@@ -29,8 +31,28 @@ function Login() {
     <main className="login-page">
       <form className="login" onSubmit={handleSubmit}>
         <h1 className="login__title">Log in</h1>
-        <Input type="text" name="username" label="Username" />
-        <Input type="password" name="password" label="Password" />
+        <div className="field">
+          <label htmlFor="username" className="field__label">
+            Username
+          </label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            className="field__input"
+          />
+        </div>
+        <div className="field">
+          <label htmlFor="password" className="field__label">
+            Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="field__input"
+          />
+        </div>
         <button className="login__button">Log in</button>
         {error && <div className="login__message">{error}</div>}
       </form>
