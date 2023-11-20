@@ -1,9 +1,9 @@
-import "./Login.scss";
+import "./SignUp.scss";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-function Login() {
+function Signup() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -11,16 +11,12 @@ function Login() {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://localhost:5050/api/auth/login",
-        {
-          username: event.target.username.value,
-          password: event.target.password.value,
-        }
-      );
+      await axios.post("http://localhost:5050/api/auth/register", {
+        username: event.target.username.value,
+        password: event.target.password.value,
+      });
 
-      sessionStorage.setItem("token", response.data.token);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.error(error);
       setError(error.response.data);
@@ -28,9 +24,9 @@ function Login() {
   };
 
   return (
-    <main className="login-page">
-      <form className="login" onSubmit={handleSubmit}>
-        <h1 className="login__title">Log in</h1>
+    <main className="signup-page">
+      <form className="signup" onSubmit={handleSubmit}>
+        <h1 className="signup__title">Sign up</h1>
         <div className="field">
           <label htmlFor="username" className="field__label">
             Username
@@ -53,15 +49,16 @@ function Login() {
             className="field__input"
           />
         </div>
-        <button className="login__button">Log in</button>
-        {error && <div className="login__message">{error}</div>}
+        <button className="signup__button">Sign up</button>
+
+        {error && <div className="signup__message">{error}</div>}
       </form>
 
       <p>
-        Need an account? <Link to="/signup">Sign up</Link>
+        Have an account? <Link to="/login">Log in</Link>
       </p>
     </main>
   );
 }
 
-export default Login;
+export default Signup;
