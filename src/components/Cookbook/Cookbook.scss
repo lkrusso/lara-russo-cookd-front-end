@@ -1,0 +1,15 @@
+@use "../../styles/partials/variables" as *;
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.cookbook {
+  border: 1px solid black;
+  border-radius: 1rem;
+  background-color: $cookd-cream;
+  padding: 1rem;
+  width: 20rem;
+  height: fit-content;
+}
