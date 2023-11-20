@@ -56,7 +56,7 @@ function RecipeCard() {
               <p className="recipe__type">Type: {recipe.cuisine_type}</p>
               <div className="recipe__further-details">
                 <RecipeIngredients recipeID={recipe.id} />
-                {/*<RecipeInstructions recipeID={recipe.id} />*/}
+                <RecipeInstructions recipeID={recipe.id} />
               </div>
             </section>
             <section className="recipe__info">
