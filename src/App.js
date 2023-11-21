@@ -4,6 +4,7 @@ import Cookbook from "./components/Cookbook/Cookbook";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import AddRecipe from "./components/AddRecipe/AddRecipe";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/recipes" element={<RecipeCard />} />
+          <Route path="/recipes/add" element={<AddRecipe />} />
           <Route path="/cookbooks" element={<Cookbook />} />
         </Routes>
       </BrowserRouter>
