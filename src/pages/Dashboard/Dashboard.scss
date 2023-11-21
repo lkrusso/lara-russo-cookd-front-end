@@ -1,0 +1,17 @@
+@use "../../styles/partials/variables" as *;
+
+.logout__button {
+  margin-top: 1rem;
+  background-color: $cookd-green;
+  border: 1px solid $cookd-green;
+  color: $cookd-cream;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: $cookd-green;
+  }
+}

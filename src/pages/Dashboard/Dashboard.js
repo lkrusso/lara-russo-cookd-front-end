@@ -43,6 +43,7 @@ function Dashboard() {
       setRecipes(data);
       setIsRecipeError(false);
     } catch (error) {
+      console.error(error);
       setIsRecipeError(true);
     }
   };
@@ -55,15 +56,16 @@ function Dashboard() {
       setCookbooks(data);
       setIsCookbookError(false);
     } catch (error) {
+      console.error(error);
       setIsCookbookError(true);
     }
   };
 
   useEffect(() => {
     login();
-    getRecipes();
     getCookbooks();
-  }, [userData, recipes, cookbooks]);
+    getRecipes();
+  });
 
   if (failedAuth) {
     return <main className="dashboard">You must log in to see this page</main>;
@@ -84,13 +86,19 @@ function Dashboard() {
 
   return (
     <main className="dashboard">
-      {cookbooks.map((cookbook) => {
-        return <Cookbook cookbook={cookbook} />;
-      })}
-      {recipes.map((recipe) => {
-        return <RecipeCard recipe={recipe} />;
-      })}
-      <button onClick={logout}>Log out</button>
+      <div className="cookbooks">
+        {cookbooks.map((cookbook) => {
+          return <Cookbook cookbook={cookbook} />;
+        })}
+      </div>
+      <div className="recipes">
+        {recipes.map((recipe) => {
+          return <RecipeCard recipe={recipe} />;
+        })}
+      </div>
+      <button className="logout__button" onClick={logout}>
+        Log out
+      </button>
     </main>
   );
 }
