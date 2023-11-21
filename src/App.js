@@ -3,12 +3,14 @@ import RecipeCard from "./components/RecipeCard/RecipeCard";
 import Cookbook from "./components/Cookbook/Cookbook";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/SignUp";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/recipes" element={<RecipeCard />} />
