@@ -2,15 +2,75 @@ import "./AddRecipe.scss";
 import { useState } from "react";
 
 function AddRecipe() {
+  const [publish, setPublish] = useState({});
   const [ingredientIndex, setIngredientIndex] = useState(1);
   const [instructionIndex, setInstructionIndex] = useState(1);
   const [addIngredientField, setAddIngredientField] = useState([]);
   const [addInstructionField, setAddInstructionField] = useState([]);
+
+  let ingredientResponse = [];
+  let instructionResponse = [];
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    const messages = {};
+    const form = event.target;
+    if (
+      !form.title ||
+      !form.duration ||
+      !form.serves ||
+      !form.cuisine_type ||
+      !form.ingredient ||
+      !form.instruction
+    ) {
+      console.error();
+      messages["error"] = "Please ensure all fields are filled in";
+      setPublish(messages);
+      return;
+    }
+
+    const recipeResponse = {
+      title: form.title.value,
+      duration: form.duration.value,
+      serves: form.serves.value,
+      cuisine_type: form.cuisine_type.value,
+    };
+
+    ingredientResponse = [{ ingredient: form.ingredient.value }];
+    if (addIngredientField.length > 0) {
+      for (let i = 0; i < addIngredientField.length; i++) {
+        ingredientResponse.push({ ingredient: addIngredientField[i].value });
+      }
+    }
+
+    instructionResponse = [{ instruction: form.instruction.value }];
+    if (addInstructionField.length > 0) {
+      for (let i = 0; i < addInstructionField.length; i++) {
+        instructionResponse.push({ instruction: addInstructionField[i].value });
+      }
+    }
   };
 
-  const addIngredient = () => {
+  const updateIngredientField = (event) => {
+    const currentField = event.target;
+    const currentIndex = addIngredientField
+      .map((e) => e.id)
+      .indexOf(currentField.id);
+    addIngredientField[currentIndex].value = event.target.value;
+    console.log(addIngredientField[currentIndex]);
+  };
+
+  const updateInstructionField = (event) => {
+    const currentField = event.target;
+    const currentIndex = addInstructionField
+      .map((e) => e.id)
+      .indexOf(currentField.id);
+    addInstructionField[currentIndex].value = event.target.value;
+    console.log(addInstructionField[currentIndex]);
+  };
+
+  const addIngredient = (event) => {
+    event.preventDefault();
     let newIngredientField = {
       htmlFor: `ingredient${ingredientIndex}`,
       id: `ingredient${ingredientIndex}`,
@@ -19,9 +79,11 @@ function AddRecipe() {
     setAddIngredientField([...addIngredientField, newIngredientField]);
     let newIngredientIndex = ingredientIndex + 1;
     setIngredientIndex(newIngredientIndex);
+    return;
   };
 
-  const addInstruction = () => {
+  const addInstruction = (event) => {
+    event.preventDefault();
     let newInstructionField = {
       htmlFor: `instruction${instructionIndex}`,
       id: `instruction${instructionIndex}`,
@@ -30,6 +92,7 @@ function AddRecipe() {
     setAddInstructionField([...addInstructionField, newInstructionField]);
     let newInstructionIndex = instructionIndex + 1;
     setInstructionIndex(newInstructionIndex);
+    return;
   };
 
   return (
@@ -80,14 +143,14 @@ function AddRecipe() {
           </label>
           <input
             type="text"
-            id="ingredient1"
-            name="ingredient1"
+            id="ingredient"
+            name="ingredient"
             className="field__input"
           />
         </div>
         {addIngredientField.map((input, index) => {
           return (
-            <div className="field">
+            <div className="field" key={index}>
               <label htmlFor={input.htmlFor} className="field__label">
                 Ingredient {index + 1}
               </label>
@@ -96,24 +159,25 @@ function AddRecipe() {
                 id={input.id}
                 name={input.name}
                 className="field__input"
+                onChange={updateIngredientField}
               />
             </div>
           );
         })}
         <div className="field">
-          <label htmlFor="instruction1" className="field__label">
+          <label htmlFor="instruction" className="field__label">
             Instruction
           </label>
           <input
             type="text"
-            id="instruction1"
-            name="instruction1"
+            id="instruction"
+            name="instruction"
             className="field__input"
           />
         </div>
         {addInstructionField.map((input, index) => {
           return (
-            <div className="field">
+            <div className="field" key={index}>
               <label htmlFor={input.htmlFor} className="field__label">
                 Instruction {index + 1}
               </label>
@@ -122,6 +186,7 @@ function AddRecipe() {
                 id={input.id}
                 name={input.name}
                 className="field__input"
+                onChange={updateInstructionField}
               />
             </div>
           );
