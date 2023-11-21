@@ -34,7 +34,9 @@ function RecipeInstructions({ recipeID }) {
       Instructions:
       {instructions.map((instruction) => {
         return (
-          <li className="recipe__instruction">{instruction.instruction}</li>
+          <li className="recipe__instruction" key={instruction.id}>
+            {instruction.instruction}
+          </li>
         );
       })}
     </ol>

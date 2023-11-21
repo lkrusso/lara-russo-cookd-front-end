@@ -14,7 +14,6 @@ function RecipeIngredients({ recipeID }) {
             id: recipeID,
           }
         );
-        console.log(data);
         setIngredients(data);
         setIsError(false);
       } catch (error) {
@@ -35,7 +34,7 @@ function RecipeIngredients({ recipeID }) {
       Ingredients:
       {ingredients.map((ingredient) => {
         return (
-          <li className="recipe__ingredient">
+          <li className="recipe__ingredient" key={ingredient.id}>
             {ingredient.quantity} {ingredient.name}
           </li>
         );
