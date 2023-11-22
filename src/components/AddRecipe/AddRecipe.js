@@ -2,6 +2,7 @@ import "./AddRecipe.scss";
 import { useState } from "react";
 
 function AddRecipe() {
+  const currentUserID = 1;
   const [publish, setPublish] = useState({});
   const [ingredientIndex, setIngredientIndex] = useState(1);
   const [instructionIndex, setInstructionIndex] = useState(1);
@@ -30,18 +31,36 @@ function AddRecipe() {
     }
 
     const recipeResponse = {
+      user_id: currentUserID,
       title: form.title.value,
       duration: form.duration.value,
       serves: form.serves.value,
       cuisine_type: form.cuisine_type.value,
     };
 
-    ingredientResponse = [{ ingredient: form.ingredient.value }];
+    let quantity = form.ingredient.value.match(/\d+/g);
+    let ingredientName = form.ingredient.value.match(/[A-Za-z ]/g).join("");
+
+    ingredientResponse = [
+      {
+        ingredient: ingredientName,
+        quantity: quantity[0],
+      },
+    ];
     if (addIngredientField.length > 0) {
       for (let i = 0; i < addIngredientField.length; i++) {
-        ingredientResponse.push({ ingredient: addIngredientField[i].value });
+        let quantity = addIngredientField[i].value.match(/\d+/g);
+        let ingredientName = addIngredientField[i].value
+          .match(/[A-Za-z ]/g)
+          .join("");
+        ingredientResponse.push({
+          ingredient: ingredientName,
+          quantity: quantity[0],
+        });
       }
     }
+    console.log(ingredientResponse);
+    //await axios.post("http://localhost:5050/api/ingredients/add" , {"ingredientList": ingredientResponse, "recipe_id": currentRecipeID});
 
     instructionResponse = [{ instruction: form.instruction.value }];
     if (addInstructionField.length > 0) {
