@@ -1,21 +1,26 @@
 import "./AddRecipe.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function AddRecipe() {
   const currentUserID = 1;
+  let currentRecipeID = "";
+  const navigate = useNavigate();
   const [publish, setPublish] = useState({});
   const [ingredientIndex, setIngredientIndex] = useState(1);
   const [instructionIndex, setInstructionIndex] = useState(1);
   const [addIngredientField, setAddIngredientField] = useState([]);
   const [addInstructionField, setAddInstructionField] = useState([]);
 
-  let ingredientResponse = [];
-  let instructionResponse = [];
+  let ingredientList = [];
+  let instructionList = [];
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const messages = {};
     const form = event.target;
+
     if (
       !form.title ||
       !form.duration ||
@@ -33,41 +38,74 @@ function AddRecipe() {
     const recipeResponse = {
       user_id: currentUserID,
       title: form.title.value,
-      duration: form.duration.value,
-      serves: form.serves.value,
+      duration: parseInt(form.duration.value),
+      serves: parseInt(form.serves.value),
       cuisine_type: form.cuisine_type.value,
+    };
+
+    const sendRecipe = async () => {
+      const { data } = await axios.post(
+        "http://localhost:5050/api/recipes/add",
+        recipeResponse
+      );
+      currentRecipeID = data[0].id;
+      return currentRecipeID;
     };
 
     let quantity = form.ingredient.value.match(/\d+/g);
     let ingredientName = form.ingredient.value.match(/[A-Za-z ]/g).join("");
 
-    ingredientResponse = [
+    ingredientList = [
       {
         ingredient: ingredientName,
         quantity: quantity[0],
       },
     ];
+
     if (addIngredientField.length > 0) {
       for (let i = 0; i < addIngredientField.length; i++) {
         let quantity = addIngredientField[i].value.match(/\d+/g);
-        let ingredientName = addIngredientField[i].value
+        let alteredIngredientName = addIngredientField[i].value
           .match(/[A-Za-z ]/g)
           .join("");
-        ingredientResponse.push({
-          ingredient: ingredientName,
+        ingredientList.push({
+          ingredient: alteredIngredientName,
           quantity: quantity[0],
         });
       }
     }
-    console.log(ingredientResponse);
-    //await axios.post("http://localhost:5050/api/ingredients/add" , {"ingredientList": ingredientResponse, "recipe_id": currentRecipeID});
 
-    instructionResponse = [{ instruction: form.instruction.value }];
+    const sendIngredients = async () => {
+      await axios.post("http://localhost:5050/api/ingredients/add", {
+        ingredientList: ingredientList,
+        recipe_id: currentRecipeID,
+      });
+    };
+
+    instructionList = [{ instruction: form.instruction.value }];
+
     if (addInstructionField.length > 0) {
       for (let i = 0; i < addInstructionField.length; i++) {
-        instructionResponse.push({ instruction: addInstructionField[i].value });
+        instructionList.push({ instruction: addInstructionField[i].value });
       }
     }
+
+    const sendInstructions = async () => {
+      await axios.post("http://localhost:5050/api/instructions/add", {
+        instructionList: instructionList,
+        recipe_id: currentRecipeID,
+      });
+    };
+
+    sendRecipe().then(sendIngredients).then(sendInstructions);
+    setAddIngredientField([]);
+    setAddInstructionField([]);
+
+    messages["success"] = "Recipe created successfully!";
+    setPublish(messages);
+    return setTimeout(() => {
+      navigate("/");
+    }, 2500);
   };
 
   const updateIngredientField = (event) => {
@@ -125,7 +163,7 @@ function AddRecipe() {
         </div>
         <div className="field">
           <label htmlFor="duration" className="field__label">
-            Duration
+            Duration in minutes
           </label>
           <input
             type="text"
@@ -210,6 +248,12 @@ function AddRecipe() {
             </div>
           );
         })}
+        {publish.success && (
+          <p className="message message--success">{publish.success}</p>
+        )}
+        {publish.error && (
+          <p className="message message--error">{publish.error}</p>
+        )}
         <button className="add-ingredient" onClick={addIngredient}>
           Add another ingredient
         </button>
