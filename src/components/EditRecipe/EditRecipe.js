@@ -1,15 +1,58 @@
 import "./EditRecipe.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function EditRecipe() {
+  let recipeID = 1;
+  const [fields, setFields] = useState({});
+  const [errors, setErrors] = useState({
+    title: "",
+    duration: "",
+    serves: "",
+    cuisine_type: "",
+  });
+  //const navigate = useNavigate();
+
+  useEffect(() => {
+    const getRecipe = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:5050/api/recipes/${recipeID}`
+        );
+        setFields(data[0]);
+      } catch (err) {
+        return console.error(err);
+      }
+    };
+    getRecipe();
+  }, []);
+
+  const checkField = (field) => {
+    if (!field.value) {
+      setErrors({
+        ...errors,
+        [field.name]: `Please fill in this field`,
+      });
+    } else {
+      setErrors({ ...errors, [field.name]: "" });
+    }
+  };
+
+  const updateFields = (event) => {
+    const currentField = event.target;
+    checkField(currentField);
+    setFields({ ...fields, [currentField.name]: currentField.value });
+    return;
+  };
+
   return (
     <div className="edit-wrapper">
       <section className="edit-recipe">
         <div className="edit-recipe__header">
           <h1>Edit Recipe</h1>
         </div>
-        <form className="edit-recipe__main" onSubmit={handleSubmit}>
+        <form className="edit-recipe__main">
           <div className="form-questions">
             <div className="recipe">
               <h3>Recipe Details</h3>

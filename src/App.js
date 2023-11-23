@@ -6,6 +6,7 @@ import Signup from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import AddRecipe from "./components/AddRecipe/AddRecipe";
 import AddCookbook from "./components/AddCookbook/AddCookbook";
+import EditRecipe from "./components/EditRecipe/EditRecipe";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/recipes/add" element={<AddRecipe />} />
           <Route path="/cookbooks" element={<Cookbook />} />
           <Route path="/cookbooks/add" element={<AddCookbook />} />
+          <Route path="/recipes/edit" element={<EditRecipe />} />
         </Routes>
       </BrowserRouter>
     </div>
