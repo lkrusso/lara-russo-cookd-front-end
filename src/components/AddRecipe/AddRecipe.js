@@ -209,7 +209,7 @@ function AddRecipe() {
           return (
             <div className="field" key={index}>
               <label htmlFor={input.htmlFor} className="field__label">
-                Ingredient {index + 1}
+                Ingredient {index + 2}
               </label>
               <input
                 type="text"

@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 function EditRecipe() {
   let recipeID = 1;
+  let recipeData;
+  let fieldData = {};
+  const ingredientList = {};
+  const [ingredients, setIngredients] = useState([]);
   const [fields, setFields] = useState({});
   const [errors, setErrors] = useState({
     title: "",
@@ -12,6 +16,7 @@ function EditRecipe() {
     serves: "",
     cuisine_type: "",
   });
+  //const [cookbookID, setCookbookID] = useState(null);
   //const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,11 +26,32 @@ function EditRecipe() {
           `http://localhost:5050/api/recipes/${recipeID}`
         );
         setFields(data[0]);
-      } catch (err) {
-        return console.error(err);
+        return (fieldData = data[0]);
+      } catch (error) {
+        return console.error(error);
       }
     };
-    getRecipe();
+    const getIngredients = async () => {
+      try {
+        const { data } = await axios.post(
+          `http://localhost:5050/api/ingredients`,
+          { recipe_id: recipeID }
+        );
+        setIngredients(data);
+
+        for (let i = 0; i < data.length; i++) {
+          let currentIngredient = data[i].quantity + " " + data[i].name;
+          let currentIngredientName = `ingredient${i}`;
+          fieldData[currentIngredientName] = currentIngredient;
+        }
+        console.log(fieldData);
+        setFields(fieldData);
+        console.log(fields);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getRecipe().then(getIngredients);
   }, []);
 
   const checkField = (field) => {
@@ -41,6 +67,9 @@ function EditRecipe() {
 
   const updateFields = (event) => {
     const currentField = event.target;
+    console.log(currentField);
+    console.log(currentField.name);
+    console.log(currentField.value);
     checkField(currentField);
     setFields({ ...fields, [currentField.name]: currentField.value });
     return;
@@ -59,7 +88,7 @@ function EditRecipe() {
               <label htmlFor="title">Title</label>
               <input
                 type="text"
-                name={"title"}
+                name="title"
                 onChange={updateFields}
                 value={fields.title}
               />
@@ -67,7 +96,7 @@ function EditRecipe() {
               <label htmlFor="duration">Duration in minutes</label>
               <input
                 type="text"
-                name={"duration"}
+                name="duration"
                 onChange={updateFields}
                 value={fields.duration}
               />
@@ -75,7 +104,7 @@ function EditRecipe() {
               <label htmlFor="serves">Serves</label>
               <input
                 type="text"
-                name={"serves"}
+                name="serves"
                 onChange={updateFields}
                 value={fields.serves}
               />
@@ -83,19 +112,30 @@ function EditRecipe() {
               <label htmlFor="cuisine_type">Type of cuisine</label>
               <input
                 type="text"
-                name={"cuisine_type"}
+                name="cuisine_type"
                 onChange={updateFields}
-                value={fields.serves}
+                value={fields.cuisine_type}
               />
               <p className="error-message">{errors.cuisine_type}</p>
-              <label htmlFor="cookbook__name">Cookbook name</label>
-              <input
-                type="text"
-                name={"cookbook_name"}
-                onChange={updateFields}
-                value={fields.cookbook_name}
-              />
-              {/* <p className="error-message">{errors.cookbook_name}</p> */}
+              {ingredients.map((ingredient, index) => {
+                return (
+                  <>
+                    <label htmlFor={`ingredient${index}`} key={ingredient.id}>
+                      Ingredient {index + 1}
+                    </label>
+                    <input
+                      type="text"
+                      id={`ingredient${index}`}
+                      name={`ingredient${index}`}
+                      value={fields[`ingredient${index}`]}
+                      onChange={updateFields}
+                    />
+                    <p className="error-message">
+                      {errors[`ingredient${index}`]}
+                    </p>
+                  </>
+                );
+              })}
             </div>
           </div>
           <div className="btn-container">
