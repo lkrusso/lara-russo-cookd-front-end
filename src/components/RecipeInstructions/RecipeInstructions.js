@@ -8,11 +8,8 @@ function RecipeInstructions({ recipeID }) {
   useEffect(() => {
     const getInstructions = async () => {
       try {
-        const { data } = await axios.post(
-          "http://localhost:5050/api/instructions",
-          {
-            id: recipeID,
-          }
+        const { data } = await axios.get(
+          `http://localhost:5050/api/instructions/${recipeID}`
         );
         setInstructions(data);
         setIsError(false);

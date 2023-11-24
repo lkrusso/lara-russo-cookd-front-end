@@ -38,9 +38,12 @@ function Dashboard() {
 
   const getRecipes = async () => {
     try {
-      const { data } = await axios.post("http://localhost:5050/api/recipes", {
-        id: userData.id,
-      });
+      const { data } = await axios.get(
+        `http://localhost:5050/api/recipes/users/${userData.id}`,
+        {
+          id: userData.id,
+        }
+      );
       setRecipes(data);
       setIsRecipeError(false);
     } catch (error) {
@@ -51,9 +54,9 @@ function Dashboard() {
 
   const getCookbooks = async () => {
     try {
-      const { data } = await axios.post("http://localhost:5050/api/cookbooks", {
-        id: userData.id,
-      });
+      const { data } = await axios.get(
+        `http://localhost:5050/api/cookbooks/users/${userData.id}`
+      );
       setCookbooks(data);
       setIsCookbookError(false);
     } catch (error) {

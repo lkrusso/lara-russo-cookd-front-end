@@ -8,11 +8,8 @@ function RecipeIngredients({ recipeID }) {
   useEffect(() => {
     const getIngredients = async () => {
       try {
-        const { data } = await axios.post(
-          "http://localhost:5050/api/ingredients",
-          {
-            id: recipeID,
-          }
+        const { data } = await axios.get(
+          `http://localhost:5050/api/ingredients/${recipeID}`
         );
         setIngredients(data);
         setIsError(false);
