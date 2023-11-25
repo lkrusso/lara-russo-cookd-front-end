@@ -8,6 +8,7 @@ import AddRecipe from "./components/AddRecipe/AddRecipe";
 import AddCookbook from "./components/AddCookbook/AddCookbook";
 import EditRecipe from "./components/EditRecipe/EditRecipe";
 import NavBar from "./components/NavBar/NavBar";
+import "./App.scss";
 
 function App() {
   return (
