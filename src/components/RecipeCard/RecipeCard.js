@@ -1,10 +1,20 @@
 import RecipeInstructions from "../RecipeInstructions/RecipeInstructions";
 import RecipeIngredients from "../RecipeIngredients/RecipeIngredients";
 import "./RecipeCard.scss";
+import * as mdIcons from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function RecipeCard({ recipe }) {
   return (
     <article className="recipe" key={recipe.id}>
+      <button className="recipe__delete">
+        <mdIcons.MdDelete />
+      </button>
+      <div className="recipe__edit">
+        <Link to={`/recipes/${recipe.id}/edit`}>
+          <mdIcons.MdEdit />
+        </Link>
+      </div>
       <h3 className="recipe__name">{recipe.title}</h3>
       <img
         src={recipe.image_url ? recipe.image_url : "https://placehold.co/75x25"}

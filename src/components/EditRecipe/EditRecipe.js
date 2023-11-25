@@ -1,10 +1,10 @@
 import "./EditRecipe.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function EditRecipe() {
-  let recipeID = 1;
+  let { id } = useParams();
   let fieldData = {};
   let updatedIngredients = [];
   let modifiedInstructions = [];
@@ -19,14 +19,13 @@ function EditRecipe() {
     cuisine_type: "",
   });
   const [publish, setPublish] = useState({});
-  //const [cookbookID, setCookbookID] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getRecipe = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/recipes/${recipeID}`
+          `http://localhost:5050/api/recipes/${id}`
         );
         setFields(data[0]);
         return (fieldData = data[0]);
@@ -37,7 +36,7 @@ function EditRecipe() {
     const getIngredients = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/ingredients/${recipeID}`
+          `http://localhost:5050/api/ingredients/${id}`
         );
         setIngredients(data);
         console.log(ingredients);
@@ -54,7 +53,7 @@ function EditRecipe() {
     const getInstructions = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/instructions/${recipeID}`
+          `http://localhost:5050/api/instructions/${id}`
         );
         setInstructions(data);
         for (let i = 0; i < data.length; i++) {
@@ -119,7 +118,7 @@ function EditRecipe() {
       ingredient.id = ingredientID;
       ingredient.quantity = ingredientQuantity[0];
       ingredient.name = ingredientName;
-      ingredient.recipe_id = recipeID;
+      ingredient.recipe_id = id;
       updatedIngredients.push(ingredient);
     });
     console.log(updatedIngredients);
@@ -138,7 +137,7 @@ function EditRecipe() {
       let instructionID = instructions[index].id;
       instruction.id = instructionID;
       instruction.instruction = value;
-      instruction.recipe_id = recipeID;
+      instruction.recipe_id = id;
       modifiedInstructions.push(instruction);
     });
     let updatedInstructions = { instructions: modifiedInstructions };
