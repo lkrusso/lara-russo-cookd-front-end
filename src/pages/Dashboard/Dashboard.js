@@ -36,13 +36,10 @@ function Dashboard() {
     setIsLoading(false);
   };
 
-  const getRecipes = async () => {
+  const getDisplayRecipes = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5050/api/recipes/users/${userData.id}`,
-        {
-          id: userData.id,
-        }
+        `http://localhost:5050/api/recipes/users/nocookbooks/${userData.id}`
       );
       setRecipes(data);
       setIsRecipeError(false);
@@ -68,7 +65,7 @@ function Dashboard() {
   useEffect(() => {
     login();
     getCookbooks();
-    getRecipes();
+    getDisplayRecipes();
   });
 
   if (failedAuth) {
@@ -88,11 +85,15 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
+  const seeCookbookDetails = (event) => {
+    navigate("/cookbook");
+  };
+
   return (
     <main className="dashboard">
       <div className="cookbooks">
         {cookbooks.map((cookbook) => {
-          return <Cookbook cookbook={cookbook} />;
+          return <Cookbook cookbook={cookbook} onClick={seeCookbookDetails} />;
         })}
       </div>
       <div className="recipes">
@@ -100,9 +101,6 @@ function Dashboard() {
           return <RecipeCard recipe={recipe} />;
         })}
       </div>
-      <button className="logout__button" onClick={logout}>
-        Log out
-      </button>
     </main>
   );
 }
