@@ -1,10 +1,10 @@
 import "./AddRecipe.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function AddRecipe() {
-  const currentUserID = 1;
+  let { userID } = useParams();
   let currentRecipeID = "";
   const navigate = useNavigate();
   const [publish, setPublish] = useState({});
@@ -36,7 +36,7 @@ function AddRecipe() {
     }
 
     const recipeResponse = {
-      user_id: currentUserID,
+      user_id: userID,
       title: form.title.value,
       duration: parseInt(form.duration.value),
       serves: parseInt(form.serves.value),
@@ -114,7 +114,6 @@ function AddRecipe() {
       .map((e) => e.id)
       .indexOf(currentField.id);
     addIngredientField[currentIndex].value = event.target.value;
-    console.log(addIngredientField[currentIndex]);
   };
 
   const updateInstructionField = (event) => {
@@ -123,7 +122,6 @@ function AddRecipe() {
       .map((e) => e.id)
       .indexOf(currentField.id);
     addInstructionField[currentIndex].value = event.target.value;
-    console.log(addInstructionField[currentIndex]);
   };
 
   const addIngredient = (event) => {

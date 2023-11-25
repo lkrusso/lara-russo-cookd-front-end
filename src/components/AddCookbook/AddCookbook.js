@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "./AddCookbook.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 function AddCookbook() {
-  const currentUserID = 1;
+  let { userID } = useParams();
+  //const currentUserID = 1;
   let currentCookbookID = null;
   let updateRecipes = {};
   const navigate = useNavigate();
@@ -14,10 +15,9 @@ function AddCookbook() {
   useEffect(() => {
     const getRecipes = async () => {
       try {
-        const { data } = await axios.post("http://localhost:5050/api/recipes", {
-          id: currentUserID,
-        });
-        console.log(data);
+        const { data } = await axios.get(
+          `http://localhost:5050/api/recipes/users/${userID}`
+        );
         setRecipes(data);
       } catch (error) {
         console.error(error);
@@ -44,7 +44,7 @@ function AddCookbook() {
     }
 
     const cookbookResponse = {
-      user_id: currentUserID,
+      user_id: userID,
       name: form.name.value,
     };
 
@@ -59,7 +59,7 @@ function AddCookbook() {
         let recipeList = [];
         checkBoxes.forEach((checkbox) => {
           if (checkbox.checked === true) {
-            let chosenRecipe = { id: checkbox.id, user_id: currentUserID };
+            let chosenRecipe = { id: checkbox.id, user_id: userID };
             recipeList.push(chosenRecipe);
           }
         });

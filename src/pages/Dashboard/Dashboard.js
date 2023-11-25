@@ -108,7 +108,7 @@ function Dashboard() {
       <main className="dashboard">
         <h2 className="dashboard__subtitle">Cookbooks</h2>
         <div className="add-cookbook">
-          <Link to="/cookbooks/add">
+          <Link to={`/user/${userData.id}/cookbooks/add`}>
             <mdIcons.MdAdd />
           </Link>
         </div>
@@ -121,7 +121,7 @@ function Dashboard() {
         </div>
         <h2 className="dashboard__subtitle">Recipes</h2>
         <div className="add-recipe">
-          <Link to="/recipes/add">
+          <Link to={`/user/${userData.id}/recipes/add`}>
             <mdIcons.MdAdd />
           </Link>
         </div>

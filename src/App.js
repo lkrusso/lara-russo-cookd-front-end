@@ -21,9 +21,9 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/recipes/:id" element={<RecipeCard />} />
           <Route path="/recipes/:id/edit" element={<EditRecipe />} />
-          <Route path="/recipes/add" element={<AddRecipe />} />
+          <Route path="/user/:userID/recipes/add" element={<AddRecipe />} />
           <Route path="/cookbooks/:id" element={<Cookbook />} />
-          <Route path="/cookbooks/add" element={<AddCookbook />} />
+          <Route path="/user/:userID/cookbooks/add" element={<AddCookbook />} />
         </Routes>
       </BrowserRouter>
     </div>
