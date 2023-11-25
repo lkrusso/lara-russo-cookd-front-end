@@ -3,6 +3,7 @@ import "./NavBar.scss";
 import { useState } from "react";
 import * as mdIcons from "react-icons/md";
 import { IconContext } from "react-icons";
+import logo from "../../assets/logo.png";
 
 function NavBar() {
   const [sidebar, setSidebar] = useState(false);
@@ -26,6 +27,9 @@ function NavBar() {
           >
             <mdIcons.MdMenu />
           </div>
+          <div className="logo-container">
+            <img className="logo" src={logo} alt="Cookd logo" />
+          </div>
         </div>
         <nav
           className={
@@ -41,15 +45,25 @@ function NavBar() {
               </div>
             </li>
 
-            <li className="nav-text" onclick={showSidebar}>
-              <Link to="/">
+            <li
+              className="nav-text"
+              onclick={() => {
+                setSidebar(!sidebar);
+              }}
+            >
+              <Link to="">
                 <mdIcons.MdRestaurantMenu />
                 <span>Recipes</span>
               </Link>
             </li>
 
-            <li className="nav-text" onclick={showSidebar}>
-              <Link to="/">
+            <li
+              className="nav-text"
+              onclick={() => {
+                setSidebar(!sidebar);
+              }}
+            >
+              <Link to="">
                 <mdIcons.MdMenuBook />
                 <span>Menu board</span>
               </Link>

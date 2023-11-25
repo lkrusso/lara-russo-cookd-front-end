@@ -49,7 +49,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 0.5rem 0 0.5rem 1rem;
+  padding: 0.5rem 0 0.5rem 0.5rem;
   list-style: none;
   height: 60px;
 }
@@ -57,9 +57,9 @@
 a {
   text-decoration: none;
   color: $cookd-cream;
-  font-size: 1.25rem;
-  width: 95%;
-  height: 100%;
+  font-size: 1rem;
+  //   width: 100%;
+  //   height: 100%;
   display: flex;
   align-items: center;
   padding: 0 1rem;
@@ -67,5 +67,11 @@ a {
 }
 
 span {
-  margin-left: 1rem;
+  margin-left: 0.5rem;
+}
+
+.logo {
+  width: 10rem;
+  position: relative;
+  left: 0.85rem;
 }
