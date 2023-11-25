@@ -19,11 +19,11 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/recipes" element={<RecipeCard />} />
+          <Route path="/recipes/:id" element={<RecipeCard />} />
+          <Route path="/recipes/:id/edit" element={<EditRecipe />} />
           <Route path="/recipes/add" element={<AddRecipe />} />
-          <Route path="/cookbooks" element={<Cookbook />} />
+          <Route path="/cookbooks/:id" element={<Cookbook />} />
           <Route path="/cookbooks/add" element={<AddCookbook />} />
-          <Route path="/recipes/edit" element={<EditRecipe />} />
         </Routes>
       </BrowserRouter>
     </div>

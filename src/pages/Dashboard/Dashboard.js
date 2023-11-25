@@ -68,8 +68,21 @@ function Dashboard() {
     getDisplayRecipes();
   });
 
+  const redirectLogin = () => {
+    setTimeout(() => {
+      navigate("/login");
+    }, 2500);
+  };
+
   if (failedAuth) {
-    return <main className="dashboard">You must log in to see this page</main>;
+    return (
+      <>
+        <main className="dashboard">You must log in to see this page</main>
+        <button className="redirect-button" onClick={redirectLogin}>
+          Return to login page
+        </button>
+      </>
+    );
   }
   if (isLoading) {
     return <main className="dashboard">Loading...</main>;
