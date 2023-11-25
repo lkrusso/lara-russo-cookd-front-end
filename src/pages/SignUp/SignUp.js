@@ -5,18 +5,36 @@ import { useNavigate, Link } from "react-router-dom";
 
 function Signup() {
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const form = event.target;
+
+    if (
+      !form.username.value ||
+      !form.password.value ||
+      !form.confirm_password.value
+    ) {
+      setError("Please ensure all fields of the form are filled out");
+      return;
+    }
+
+    if (form.password.value !== form.confirm_password.value) {
+      setError("Please ensure passwords are matching");
+      return;
+    }
 
     try {
       await axios.post("http://localhost:5050/api/auth/register", {
         username: event.target.username.value,
         password: event.target.password.value,
       });
-
-      navigate("/login");
+      setSuccess("Successfully signed up! Redirecting to login page...");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2500);
     } catch (error) {
       console.error(error);
       setError(error.response.data);
@@ -49,9 +67,21 @@ function Signup() {
             className="field__input"
           />
         </div>
+        <div className="field">
+          <label htmlFor="confirm_password" className="field__label">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            className="field__input"
+          />
+        </div>
         <button className="signup__button">Sign up</button>
 
         {error && <div className="signup__message">{error}</div>}
+        {success && <div className="success__message">{success}</div>}
       </form>
 
       <p>
