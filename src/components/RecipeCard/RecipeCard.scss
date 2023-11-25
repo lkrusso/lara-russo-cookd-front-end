@@ -1,5 +1,5 @@
 @use "../../styles/partials/variables" as *;
-
+@use "../../styles/partials/global" as *;
 h3,
 p {
   margin: 0;
@@ -48,5 +48,11 @@ p {
   &__review,
   &__comments {
     margin: 0.5rem 0;
+  }
+  &__delete {
+    background: none;
+  }
+  &__edit {
+    width: 2rem;
   }
 }
