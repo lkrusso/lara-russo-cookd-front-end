@@ -7,12 +7,14 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import AddRecipe from "./components/AddRecipe/AddRecipe";
 import AddCookbook from "./components/AddCookbook/AddCookbook";
 import EditRecipe from "./components/EditRecipe/EditRecipe";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          <Route path="/navbar" element={<NavBar />} />
           <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
