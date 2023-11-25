@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import Cookbook from "../../components/Cookbook/Cookbook";
-import AddCookbook from "../../components/AddCookbook/AddCookbook";
+import * as mdIcons from "react-icons/md";
+import { IconContext } from "react-icons";
 
 function Dashboard() {
   const [failedAuth, setFailedAuth] = useState(false);
@@ -103,18 +104,34 @@ function Dashboard() {
   };
 
   return (
-    <main className="dashboard">
-      <div className="cookbooks">
-        {cookbooks.map((cookbook) => {
-          return <Cookbook cookbook={cookbook} onClick={seeCookbookDetails} />;
-        })}
-      </div>
-      <div className="recipes">
-        {recipes.map((recipe) => {
-          return <RecipeCard recipe={recipe} />;
-        })}
-      </div>
-    </main>
+    <IconContext.Provider value={{ color: "#4b6c37" }}>
+      <main className="dashboard">
+        <h2 className="dashboard__subtitle">Cookbooks</h2>
+        <div className="add-cookbook">
+          <Link to="/cookbooks/add">
+            <mdIcons.MdAdd />
+          </Link>
+        </div>
+        <div className="cookbooks">
+          {cookbooks.map((cookbook) => {
+            return (
+              <Cookbook cookbook={cookbook} onClick={seeCookbookDetails} />
+            );
+          })}
+        </div>
+        <h2 className="dashboard__subtitle">Recipes</h2>
+        <div className="add-recipe">
+          <Link to="/recipes/add">
+            <mdIcons.MdAdd />
+          </Link>
+        </div>
+        <div className="recipes">
+          {recipes.map((recipe) => {
+            return <RecipeCard recipe={recipe} />;
+          })}
+        </div>
+      </main>
+    </IconContext.Provider>
   );
 }
 
