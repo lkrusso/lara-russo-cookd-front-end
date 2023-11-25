@@ -5,9 +5,7 @@ import axios from "axios";
 
 function AddCookbook() {
   let { userID } = useParams();
-  //const currentUserID = 1;
   let currentCookbookID = null;
-  let updateRecipes = {};
   const navigate = useNavigate();
   const [publish, setPublish] = useState({});
   const [recipes, setRecipes] = useState(null);
