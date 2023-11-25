@@ -55,7 +55,10 @@ function Signup() {
       </form>
 
       <p>
-        Have an account? <Link to="/login">Log in</Link>
+        Have an account?{" "}
+        <Link to="/login" className="login-link">
+          Log in
+        </Link>
       </p>
     </main>
   );

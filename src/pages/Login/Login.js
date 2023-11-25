@@ -18,7 +18,7 @@ function Login() {
           password: event.target.password.value,
         }
       );
-
+      console.log(response);
       sessionStorage.setItem("token", response.data.token);
       navigate("/");
     } catch (error) {
@@ -58,7 +58,10 @@ function Login() {
       </form>
 
       <p>
-        Need an account? <Link to="/signup">Sign up</Link>
+        Need an account?{" "}
+        <Link to="/signup" className="signup-link">
+          Sign up
+        </Link>
       </p>
     </main>
   );
