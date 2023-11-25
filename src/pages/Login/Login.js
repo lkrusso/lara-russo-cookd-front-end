@@ -9,16 +9,21 @@ function Login() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const form = event.target;
+
+    if (!form.username.value || !form.password.value) {
+      setError("Please ensure all fields of the form are filled out");
+      return;
+    }
 
     try {
       const response = await axios.post(
         "http://localhost:5050/api/auth/login",
         {
-          username: event.target.username.value,
-          password: event.target.password.value,
+          username: form.username.value,
+          password: form.password.value,
         }
       );
-      console.log(response);
       sessionStorage.setItem("token", response.data.token);
       navigate("/");
     } catch (error) {
