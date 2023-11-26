@@ -1,3 +1,4 @@
+@use "../partials/variables" as *;
 *,
 *::before,
 *::after {
@@ -10,4 +11,5 @@
 body {
   padding: 0;
   margin: 0;
+  background-color: $cookd-off-white;
 }

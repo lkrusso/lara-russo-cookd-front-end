@@ -41,7 +41,6 @@ function EditRecipe() {
           `http://localhost:5050/api/ingredients/${id}`
         );
         setIngredients(data);
-        console.log(ingredients);
         for (let i = 0; i < data.length; i++) {
           let currentIngredient = data[i].quantity + data[i].name;
           let currentIngredientName = `ingredient${i}`;
@@ -178,107 +177,135 @@ function EditRecipe() {
   };
 
   return (
-    <IconContext.Provider value={{ color: "#4b6c37" }}>
-      <div className="edit-wrapper">
-        <section className="edit-recipe">
-          <div className="edit-recipe__header">
-            <div className="edit-recipe__back">
-              <Link to="/">
-                <mdIcons.MdArrowBack />
-              </Link>
-            </div>
-            <h1>Edit Recipe</h1>
+    <IconContext.Provider value={{ color: "#4b6c37", size: 30 }}>
+      <section className="edit-recipe">
+        <div className="edit-recipe__header">
+          <div className="edit-recipe__back">
+            <Link to={`/user/${fields.user_id}`}>
+              <mdIcons.MdArrowBack />
+            </Link>
           </div>
-          <form className="edit-recipe__main" onSubmit={handleSubmit}>
-            <div className="form-questions">
-              <div className="recipe">
-                <h3>Recipe Details</h3>
-                <label htmlFor="title">Title</label>
+          <h1 className="edit-recipe__title">Edit Recipe</h1>
+        </div>
+        <form className="edit-recipe__main" onSubmit={handleSubmit}>
+          <div className="form-questions">
+            <div className="recipe">
+              <h3>Recipe Details</h3>
+              <div className="edit">
+                <label htmlFor="title" className="edit__label">
+                  Title
+                </label>
                 <input
+                  className="edit__input"
                   type="text"
                   name="title"
                   onChange={updateFields}
                   value={fields.title}
                 />
-                <p className="error-message">{errors.title}</p>
-                <label htmlFor="duration">Duration in minutes</label>
+              </div>
+              <p className="error-message">{errors.title}</p>
+              <div className="edit">
+                <label className="edit__label" htmlFor="duration">
+                  Duration in minutes
+                </label>
                 <input
+                  className="edit__input"
                   type="text"
                   name="duration"
                   onChange={updateFields}
                   value={fields.duration}
                 />
-                <p className="error-message">{errors.duration}</p>
-                <label htmlFor="serves">Serves</label>
+              </div>
+
+              <p className="error-message">{errors.duration}</p>
+              <div className="edit">
+                <label className="edit__label" htmlFor="serves">
+                  Serves
+                </label>
                 <input
+                  className="edit__input"
                   type="text"
                   name="serves"
                   onChange={updateFields}
                   value={fields.serves}
                 />
-                <p className="error-message">{errors.serves}</p>
-                <label htmlFor="cuisine_type">Type of cuisine</label>
+              </div>
+
+              <p className="error-message">{errors.serves}</p>
+              <div className="edit">
+                <label className="edit__label" htmlFor="cuisine_type">
+                  Type of cuisine
+                </label>
                 <input
+                  className="edit__input"
                   type="text"
                   name="cuisine_type"
                   onChange={updateFields}
                   value={fields.cuisine_type}
                 />
-                <p className="error-message">{errors.cuisine_type}</p>
-                {ingredients.map((ingredient, index) => {
-                  return (
-                    <>
-                      <label htmlFor={`ingredient${index}`} key={ingredient.id}>
-                        Ingredient {index + 1}
-                      </label>
-                      <input
-                        type="text"
-                        id={`ingredient${index}`}
-                        name={`ingredient${index}`}
-                        value={fields[`ingredient${index}`]}
-                        onChange={updateFields}
-                      />
-                      <p className="error-message">
-                        {errors[`ingredient${index}`]}
-                      </p>
-                    </>
-                  );
-                })}
-                {instructions.map((_instruction, index) => {
-                  return (
-                    <>
-                      <label htmlFor={`instruction${index}`} key={index}>
-                        Instruction {index + 1}
-                      </label>
-                      <input
-                        type="text"
-                        id={`instruction${index}`}
-                        name={`instruction${index}`}
-                        value={fields[`instruction${index}`]}
-                        onChange={updateFields}
-                      />
-                      <p className="error-message">
-                        {errors[`instruction${index}`]}
-                      </p>
-                    </>
-                  );
-                })}
               </div>
+              <p className="error-message">{errors.cuisine_type}</p>
+              {ingredients.map((ingredient, index) => {
+                return (
+                  <div className="edit">
+                    <label
+                      className="edit__label"
+                      htmlFor={`ingredient${index}`}
+                      key={ingredient.id}
+                    >
+                      Ingredient {index + 1}
+                    </label>
+                    <input
+                      className="edit__input"
+                      type="text"
+                      id={`ingredient${index}`}
+                      name={`ingredient${index}`}
+                      value={fields[`ingredient${index}`]}
+                      onChange={updateFields}
+                    />
+                    <p className="error-message">
+                      {errors[`ingredient${index}`]}
+                    </p>
+                  </div>
+                );
+              })}
+              {instructions.map((_instruction, index) => {
+                return (
+                  <div className="edit">
+                    <label
+                      className="edit__label"
+                      htmlFor={`instruction${index}`}
+                      key={index}
+                    >
+                      Instruction {index + 1}{" "}
+                    </label>
+                    <input
+                      className="edit__input"
+                      type="text"
+                      id={`instruction${index}`}
+                      name={`instruction${index}`}
+                      value={fields[`instruction${index}`]}
+                      onChange={updateFields}
+                    />
+                    <p className="error-message">
+                      {errors[`instruction${index}`]}
+                    </p>
+                  </div>
+                );
+              })}
             </div>
-            {publish.success && (
-              <p className="message message--success">{publish.success}</p>
-            )}
-            {publish.error && (
-              <p className="message message--error">{publish.error}</p>
-            )}
-            <div className="btn-container">
-              <button className="update-btn" type="submit">
-                Update
-              </button>
-            </div>
-          </form>
-        </section>
-      </div>
+          </div>
+          {publish.success && (
+            <p className="message message--success">{publish.success}</p>
+          )}
+          {publish.error && (
+            <p className="message message--error">{publish.error}</p>
+          )}
+          <button className="update-btn" type="submit">
+            Update
+          </button>
+        </form>
+      </section>
     </IconContext.Provider>
   );
 }
