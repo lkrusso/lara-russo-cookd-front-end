@@ -5,21 +5,23 @@ import { Link } from "react-router-dom";
 
 function Cookbook({ cookbook, handleDeleteCookbookClick, setClickedID }) {
   return (
-    <IconContext.Provider value={{ color: "#4b6c37" }}>
+    <IconContext.Provider value={{ color: "#fefae0", size: 30 }}>
       <article className="cookbook" key={cookbook.id}>
-        <button
-          className="cookbook__delete"
-          onClick={() => {
-            setClickedID(cookbook.id);
-            handleDeleteCookbookClick();
-          }}
-        >
-          <mdIcons.MdDelete />
-        </button>
-        <div className="cookbook__edit">
-          <Link to={`/cookbooks/${cookbook.id}/edit`}>
-            <mdIcons.MdEdit />
-          </Link>
+        <div className="cookbook__buttons">
+          <button
+            className="cookbook__delete"
+            onClick={() => {
+              setClickedID(cookbook.id);
+              handleDeleteCookbookClick();
+            }}
+          >
+            <mdIcons.MdDelete />
+          </button>
+          <div className="cookbook__edit">
+            <Link to={`/cookbooks/${cookbook.id}/edit`}>
+              <mdIcons.MdEdit />
+            </Link>
+          </div>
         </div>
         <Link className="cookbook__title" to={`/cookbooks/${cookbook.id}`}>
           {cookbook.name}

@@ -6,14 +6,77 @@ p {
 }
 
 .cookbook {
-  border: 1px solid black;
+  margin-bottom: 2rem;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(75, 108, 55, 0.2),
+    0 6px 20px 0 rgba(75, 108, 55, 0.2);
   border-radius: 1rem;
-  background-color: $cookd-cream;
-  padding: 1rem;
+  background-color: $cookd-dark-green;
+  padding: 1rem 0.5rem;
   width: 20rem;
-  height: fit-content;
+  height: 10rem;
   &__title {
-    color: black;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    color: $cookd-cream;
+    margin: 1rem;
+    text-align: center;
   }
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+  }
+  &__delete,
+  &__edit {
+    margin: 0 0.5rem;
+  }
+  &__delete {
+    border: none;
+  }
+  &__image {
+    margin: 0.5rem, 0;
+    border-radius: 1rem;
+  }
+  &__details {
+    padding: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__left {
+    width: 30%;
+  }
+  &__right {
+    width: 60%;
+  }
+  &__ingredients {
+    list-style: none;
+  }
+  &__info {
+    margin: 0;
+  }
+  &__name,
+  &__duration,
+  &__serve,
+  &__review,
+  &__type,
+  &__comments {
+    margin: 0.5rem 0;
+  }
+  &__duration {
+    margin-top: 0;
+  }
+  &__delete {
+    background: none;
+  }
+  &__edit {
+    width: 2rem;
+  }
+}
+
+.italic {
+  font-style: italic;
+  margin: 0;
 }
