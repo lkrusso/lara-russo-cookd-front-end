@@ -187,6 +187,7 @@ Below is a list of the tasks that will need to be completed in order to deliver 
   - npm i axios
   - npm i dotenv
 - Environment variables will also need to be set up in the same format as shown below:
+  ![Front end ENV setup](/src/assets/capstone-document-images/front-end-env.png)
 - Since this application is designed for mobile view, please view the application at a width of 375px; this can be achieved via ‘Mobile M’ in Google Chrome DevTools when inspecting.
 
 ## Installation Guide - Back End
@@ -201,5 +202,6 @@ Below is a list of the tasks that will need to be completed in order to deliver 
   - npm i bcryptjs
   - npm i bcrypt
 - Environment variables will also need to be set up in the same format as shown below:
+  ![Back end ENV setup](/src/assets/capstone-document-images/back-end-env.png)
 - A database will also need to be created - this can be done in the Terminal with MySQL. Please ensure the naming of the database matches the environment variables
 - Migrations will need to be run (knex migrate:latest) as well as seed files (knex seed:run)
