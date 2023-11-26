@@ -27,11 +27,11 @@ function RecipeInstructions({ recipeID }) {
     return <p>Loading...</p>;
   }
   return (
-    <ol className="recipe__instructions">
-      Instructions:
+    <ol className="recipe-card__instructions">
+      <span className="italic">Instructions: </span>
       {instructions.map((instruction) => {
         return (
-          <li className="recipe__instruction" key={instruction.id}>
+          <li className="recipe-card__instruction" key={instruction.id}>
             {instruction.instruction}
           </li>
         );

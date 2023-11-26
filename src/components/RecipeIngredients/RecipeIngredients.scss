@@ -3,3 +3,17 @@ li {
   text-align: left;
   margin: 0;
 }
+
+.recipe-card {
+  &__ingredients {
+    margin: 2rem 0;
+  }
+  &__ingredient {
+    margin: 0.5rem 0;
+  }
+}
+
+.italic {
+  font-style: italic;
+  margin: 0;
+}

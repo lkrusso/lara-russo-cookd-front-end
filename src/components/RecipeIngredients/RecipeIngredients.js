@@ -27,11 +27,11 @@ function RecipeIngredients({ recipeID }) {
     return <p>Loading...</p>;
   }
   return (
-    <ul className="recipe__ingredients">
-      Ingredients:
+    <ul className="recipe-card__ingredients">
+      <span className="italic">Ingredients: </span>
       {ingredients.map((ingredient) => {
         return (
-          <li className="recipe__ingredient" key={ingredient.id}>
+          <li className="recipe-card__ingredient" key={ingredient.id}>
             {ingredient.quantity} {ingredient.name}
           </li>
         );

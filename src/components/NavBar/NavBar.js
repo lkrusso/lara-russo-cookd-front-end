@@ -49,7 +49,7 @@ function NavBar() {
             </li>
 
             <li className="nav-text" onClick={showSidebar}>
-              <Link to="">
+              <Link to={`/user`}>
                 <mdIcons.MdRestaurantMenu />
                 <span>Recipes</span>
               </Link>
@@ -63,10 +63,8 @@ function NavBar() {
             </li>
 
             <li className="nav-text" onClick={logoutButton}>
-              <Link to="">
-                <mdIcons.MdLogout />
-                <span>Log out</span>
-              </Link>
+              <mdIcons.MdLogout />
+              <span>Log out</span>
             </li>
           </ul>
         </nav>

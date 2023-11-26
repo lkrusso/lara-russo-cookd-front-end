@@ -1,6 +1,15 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/global" as *;
 
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  overflow: scroll;
+  height: 100vh;
+}
+
 .redirect {
   display: flex;
   flex-direction: column;
