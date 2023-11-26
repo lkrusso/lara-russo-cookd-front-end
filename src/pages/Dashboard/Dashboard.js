@@ -14,9 +14,7 @@ function Dashboard() {
   const [failedAuth, setFailedAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState(null);
-  const [isRecipeError, setIsRecipeError] = useState(false);
   const [recipes, setRecipes] = useState([]);
-  const [isCookbookError, setIsCookbookError] = useState(false);
   const [cookbooks, setCookbooks] = useState([]);
   const [showDeleteRecipe, setShowDeleteRecipe] = useState(false);
   const [showDeleteCookbook, setShowDeleteCookbook] = useState(false);
@@ -37,11 +35,9 @@ function Dashboard() {
         `http://localhost:5050/api/recipes/users/nocookbooks/${userID}`
       );
       setRecipes(data);
-      setIsRecipeError(false);
       return;
     } catch (error) {
       console.error(error);
-      setIsRecipeError(true);
       return;
     }
   };
@@ -52,10 +48,8 @@ function Dashboard() {
         `http://localhost:5050/api/cookbooks/users/${userID}`
       );
       setCookbooks(data);
-      setIsCookbookError(false);
     } catch (error) {
       console.error(error);
-      setIsCookbookError(true);
       return;
     }
   };
@@ -102,20 +96,10 @@ function Dashboard() {
   if (isLoading) {
     return <main className="dashboard">Loading...</main>;
   }
-  if (isRecipeError) {
-    return <p>Error getting recipes</p>;
-  }
-  if (isCookbookError) {
-    return <p>Error getting cookbooks</p>;
-  }
 
   if (!recipes || !cookbooks) {
     return <p>Loading...</p>;
   }
-
-  // const seeCookbookDetails = (event) => {
-  //   navigate("/cookbook");
-  // };
 
   return (
     <IconContext.Provider value={{ color: "#4b6c37", size: 40 }}>
@@ -133,7 +117,7 @@ function Dashboard() {
           />
         )}
         <h2 className="dashboard__subtitle">Cookbooks</h2>
-        <div className="add-cookbook">
+        <div className="add-cookbook-btn">
           <Link to={`/user/${userData.id}/cookbooks/add`}>
             <mdIcons.MdAdd />
           </Link>
@@ -152,7 +136,7 @@ function Dashboard() {
         <h2 className="dashboard__subtitle dashboard__subtitle--second">
           Recipes
         </h2>
-        <div className="add-recipe">
+        <div className="add-recipe-btn">
           <Link to={`/user/${userData.id}/recipes/add`}>
             <mdIcons.MdAdd />
           </Link>
