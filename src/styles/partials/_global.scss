@@ -2,28 +2,3 @@
 @use "./reset" as *;
 @use "./typography" as *;
 @use "./variables" as *;
-
-// button {
-//   display: flex;
-//   flex-direction: column;
-//   width: 22rem;
-//   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
-//   background-color: #fff;
-//   border-radius: 0.5rem;
-//   padding: 2rem 1.5rem;
-//   margin-bottom: 1rem;
-//   margin-top: 1rem;
-
-//   background-color: $cookd-green;
-//   border: 1px solid $cookd-green;
-//   color: #fff;
-//   border-radius: 0.5rem;
-//   padding: 0.5rem;
-//   font-size: inherit;
-//   cursor: pointer;
-//   transition: background-color 0.15s;
-
-//   &:hover {
-//     background-color: $cookd-dark-green;
-//   }
-// }
