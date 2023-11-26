@@ -25,7 +25,7 @@ function Login() {
         }
       );
       sessionStorage.setItem("token", response.data.token);
-      navigate("/");
+      navigate(`/user/${response.data.id}`);
     } catch (error) {
       console.error(error);
       setError(error.response.data);

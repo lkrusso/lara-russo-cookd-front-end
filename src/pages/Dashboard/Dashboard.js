@@ -1,7 +1,7 @@
 import "./Dashboard.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import Cookbook from "../../components/Cookbook/Cookbook";
 import * as mdIcons from "react-icons/md";
@@ -9,6 +9,7 @@ import { IconContext } from "react-icons";
 import DeleteRecipe from "../../components/DeleteRecipe/DeleteRecipe";
 
 function Dashboard() {
+  let { userID } = useParams();
   const [failedAuth, setFailedAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -27,7 +28,7 @@ function Dashboard() {
   const getDisplayRecipes = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5050/api/recipes/users/nocookbooks/${userData.id}`
+        `http://localhost:5050/api/recipes/users/nocookbooks/${userID}`
       );
       setRecipes(data);
       setIsRecipeError(false);
@@ -42,11 +43,10 @@ function Dashboard() {
   const getCookbooks = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5050/api/cookbooks/users/${userData.id}`
+        `http://localhost:5050/api/cookbooks/users/${userID}`
       );
       setCookbooks(data);
       setIsCookbookError(false);
-      getDisplayRecipes();
     } catch (error) {
       console.error(error);
       setIsCookbookError(true);
@@ -61,10 +61,8 @@ function Dashboard() {
         "http://localhost:5050/api/auth/details",
         { headers: { Authorization: "Bearer " + token } }
       );
-      console.log(data);
       setUserData(data);
       setIsLoading(false);
-      getCookbooks();
     } catch (error) {
       console.error(error);
       setFailedAuth(true);
@@ -75,7 +73,9 @@ function Dashboard() {
 
   useEffect(() => {
     login();
-  }, [userData]);
+    getCookbooks();
+    getDisplayRecipes();
+  }, []);
 
   const redirectLogin = () => {
     setTimeout(() => {
