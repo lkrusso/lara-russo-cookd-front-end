@@ -118,7 +118,7 @@ function Dashboard() {
   // };
 
   return (
-    <IconContext.Provider value={{ color: "#4b6c37" }}>
+    <IconContext.Provider value={{ color: "#4b6c37", size: 40 }}>
       <main className="dashboard">
         {showDeleteRecipe && (
           <DeleteRecipe
@@ -149,7 +149,9 @@ function Dashboard() {
             );
           })}
         </div>
-        <h2 className="dashboard__subtitle">Recipes</h2>
+        <h2 className="dashboard__subtitle dashboard__subtitle--second">
+          Recipes
+        </h2>
         <div className="add-recipe">
           <Link to={`/user/${userData.id}/recipes/add`}>
             <mdIcons.MdAdd />

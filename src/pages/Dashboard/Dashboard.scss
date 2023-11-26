@@ -8,6 +8,15 @@
   padding: 1rem 0;
   overflow: scroll;
   height: 100vh;
+  &__subtitle {
+    color: $cookd-dark-green;
+    text-align: left;
+    position: relative;
+    left: -6rem;
+    &--second {
+      left: -7rem;
+    }
+  }
 }
 
 .redirect {
@@ -36,4 +45,11 @@
       background-color: $cookd-dark-green;
     }
   }
+}
+
+.add-cookbook,
+.add-recipe {
+  position: relative;
+  left: 8rem;
+  bottom: 1.5rem;
 }
