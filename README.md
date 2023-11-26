@@ -187,7 +187,7 @@ Below is a list of the tasks that will need to be completed in order to deliver 
   - npm i axios
   - npm i dotenv
 - Environment variables will also need to be set up in the same format as shown below:
-  ![Front end ENV setup](/src/assets/capstone-document-images/front-end-env.png)
+  ![Front end ENV setup](/src/assets/capstone-document-images/front-end-environment-variables.png)
 - Since this application is designed for mobile view, please view the application at a width of 375px; this can be achieved via ‘Mobile M’ in Google Chrome DevTools when inspecting.
 
 ## Installation Guide - Back End
