@@ -1,10 +1,11 @@
+import "./DeleteCookbook.scss";
 import * as mdIcons from "react-icons/md";
 import { IconContext } from "react-icons";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function DeleteCookbook({ clickedID, setShowDeleteModal }) {
+function DeleteCookbook({ clickedID, setShowDeleteCookbook }) {
   const [cookbook, setCookbook] = useState([]);
   const [isCookbookError, setIsCookbookError] = useState(false);
   const currentCookbookID = clickedID;
@@ -33,13 +34,14 @@ function DeleteCookbook({ clickedID, setShowDeleteModal }) {
       );
     };
     sendDeleteCookbook();
+    setShowDeleteCookbook(false);
     return setTimeout(() => {
-      navigate(`/users/${cookbook.user_id}`);
+      navigate(`/user/${cookbook.user_id}`);
     }, 2500);
   };
 
   const handleCancel = () => {
-    setShowDeleteModal(false);
+    setShowDeleteCookbook(false);
   };
 
   if (isCookbookError) {
@@ -62,7 +64,7 @@ function DeleteCookbook({ clickedID, setShowDeleteModal }) {
           </h2>
           <p className="delete-cookbook__text">
             Please confirm that you’d like to delete the cookbook named "
-            {cookbook.title}
+            {cookbook.name}
             ". You won’t be able to undo this action.
           </p>
           <div className="btn-container">

@@ -7,6 +7,7 @@ import Cookbook from "../../components/Cookbook/Cookbook";
 import * as mdIcons from "react-icons/md";
 import { IconContext } from "react-icons";
 import DeleteRecipe from "../../components/DeleteRecipe/DeleteRecipe";
+import DeleteCookbook from "../../components/DeleteCookbook/DeleteCookbook";
 
 function Dashboard() {
   let { userID } = useParams();
@@ -17,12 +18,17 @@ function Dashboard() {
   const [recipes, setRecipes] = useState([]);
   const [isCookbookError, setIsCookbookError] = useState(false);
   const [cookbooks, setCookbooks] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDeleteRecipe, setShowDeleteRecipe] = useState(false);
+  const [showDeleteCookbook, setShowDeleteCookbook] = useState(false);
   const [clickedID, setClickedID] = useState(false);
   const navigate = useNavigate();
 
-  const handleDeleteClick = () => {
-    setShowDeleteModal(true);
+  const handleDeleteRecipeClick = () => {
+    setShowDeleteRecipe(true);
+  };
+
+  const handleDeleteCookbookClick = () => {
+    setShowDeleteCookbook(true);
   };
 
   const getDisplayRecipes = async () => {
@@ -114,10 +120,16 @@ function Dashboard() {
   return (
     <IconContext.Provider value={{ color: "#4b6c37" }}>
       <main className="dashboard">
-        {showDeleteModal && (
+        {showDeleteRecipe && (
           <DeleteRecipe
             clickedID={clickedID}
-            setShowDeleteModal={setShowDeleteModal}
+            setShowDeleteRecipe={setShowDeleteRecipe}
+          />
+        )}
+        {showDeleteCookbook && (
+          <DeleteCookbook
+            clickedID={clickedID}
+            setShowDeleteCookbook={setShowDeleteCookbook}
           />
         )}
         <h2 className="dashboard__subtitle">Cookbooks</h2>
@@ -128,7 +140,13 @@ function Dashboard() {
         </div>
         <div className="cookbooks">
           {cookbooks.map((cookbook) => {
-            return <Cookbook cookbook={cookbook} />;
+            return (
+              <Cookbook
+                cookbook={cookbook}
+                handleDeleteCookbookClick={handleDeleteCookbookClick}
+                setClickedID={setClickedID}
+              />
+            );
           })}
         </div>
         <h2 className="dashboard__subtitle">Recipes</h2>
@@ -143,7 +161,7 @@ function Dashboard() {
               <RecipeCard
                 recipe={recipe}
                 setClickedID={setClickedID}
-                handleDeleteClick={handleDeleteClick}
+                handleDeleteClick={handleDeleteRecipeClick}
               />
             );
           })}

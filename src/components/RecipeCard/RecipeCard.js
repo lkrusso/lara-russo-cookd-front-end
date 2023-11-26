@@ -5,7 +5,7 @@ import * as mdIcons from "react-icons/md";
 import { Link } from "react-router-dom";
 import { IconContext } from "react-icons";
 
-function RecipeCard({ recipe, handleDeleteClick, setClickedID }) {
+function RecipeCard({ recipe, handleDeleteRecipeClick, setClickedID }) {
   return (
     <IconContext.Provider value={{ color: "#4b6c37" }}>
       <article className="recipe" key={recipe.id}>
@@ -13,7 +13,7 @@ function RecipeCard({ recipe, handleDeleteClick, setClickedID }) {
           className="recipe__delete"
           onClick={() => {
             setClickedID(recipe.id);
-            handleDeleteClick();
+            handleDeleteRecipeClick();
           }}
         >
           <mdIcons.MdDelete />

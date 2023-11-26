@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function DeleteRecipe({ clickedID, setShowDeleteModal }) {
+function DeleteRecipe({ clickedID, setShowDeleteRecipe }) {
   const [recipe, setRecipe] = useState([]);
   const [isRecipeError, setIsRecipeError] = useState(false);
   const currentRecipeID = clickedID;
@@ -41,7 +41,7 @@ function DeleteRecipe({ clickedID, setShowDeleteModal }) {
   };
 
   const handleCancel = () => {
-    setShowDeleteModal(false);
+    setShowDeleteRecipe(false);
   };
 
   if (isRecipeError) {
