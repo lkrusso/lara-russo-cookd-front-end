@@ -9,7 +9,7 @@ function RecipeInstructions({ recipeID }) {
     const getInstructions = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/instructions/${recipeID}`
+          `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/instructions/${recipeID}`
         );
         setInstructions(data);
         setIsError(false);
@@ -27,11 +27,11 @@ function RecipeInstructions({ recipeID }) {
     return <p>Loading...</p>;
   }
   return (
-    <ol className="recipe-card__instructions">
-      <span className="italic">Instructions: </span>
+    <ol className="recipe__instructions">
+      <span className="italic">Instructions:</span>
       {instructions.map((instruction) => {
         return (
-          <li className="recipe-card__instruction" key={instruction.id}>
+          <li className="recipe__instruction" key={instruction.id}>
             {instruction.instruction}
           </li>
         );

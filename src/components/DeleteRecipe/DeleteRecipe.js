@@ -15,7 +15,7 @@ function DeleteRecipe({ clickedID, setShowDeleteRecipe }) {
     const getRecipe = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/recipes/${clickedID}`
+          `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/recipes/${clickedID}`
         );
         console.log(data);
         setIsRecipeError(false);
@@ -31,7 +31,7 @@ function DeleteRecipe({ clickedID, setShowDeleteRecipe }) {
   const handleDelete = () => {
     const sendDeleteRecipe = async () => {
       return await axios.delete(
-        `http://localhost:5050/api/recipes/${currentRecipeID}/delete`
+        `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/recipes/${currentRecipeID}/delete`
       );
     };
     sendDeleteRecipe();

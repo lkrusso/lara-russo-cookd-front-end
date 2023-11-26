@@ -20,7 +20,7 @@ function CookbookPage() {
     const token = sessionStorage.getItem("token");
     try {
       const { data } = await axios.get(
-        "http://localhost:5050/api/auth/details",
+        "${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/auth/details",
         { headers: { Authorization: "Bearer " + token } }
       );
       setUserData(data);
@@ -36,7 +36,7 @@ function CookbookPage() {
   const getCookbookRecipes = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5050/api/cookbooks/${id}/recipes`
+        `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/cookbooks/${id}/recipes`
       );
       if (!data) {
         return <p>Loading...</p>;
@@ -50,7 +50,7 @@ function CookbookPage() {
   const getSelectedCookbook = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5050/api/cookbooks/${id}`
+        `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/cookbooks/${id}`
       );
       if (!data) {
         return <p>Loading...</p>;
