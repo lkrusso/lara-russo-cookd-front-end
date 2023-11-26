@@ -1,0 +1,13 @@
+@use "../../styles/partials/variables" as *;
+
+.error {
+  &__container {
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+  &__message {
+    color: $cookd-dark-green;
+  }
+}

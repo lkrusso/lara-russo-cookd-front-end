@@ -10,6 +10,7 @@ import EditRecipe from "./components/EditRecipe/EditRecipe";
 import NavBar from "./components/NavBar/NavBar";
 import "./App.scss";
 import CookbookPage from "./pages/CookbookPage/CookbookPage";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/user/:userID/recipes/add" element={<AddRecipe />} />
           <Route path="/cookbooks/:id" element={<CookbookPage />} />
           <Route path="/user/:userID/cookbooks/add" element={<AddCookbook />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
