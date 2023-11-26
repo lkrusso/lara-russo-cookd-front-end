@@ -7,14 +7,17 @@ p {
 }
 
 .recipe-card {
+  margin-bottom: 2rem;
   font-size: 0.75rem;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(75, 108, 55, 0.2),
+    0 6px 20px 0 rgba(75, 108, 55, 0.2);
   border-radius: 1rem;
   background-color: $cookd-cream;
   padding: 1rem 0.5rem;
   width: 20rem;
+  color: $cookd-dark-green;
   &__name {
     font-size: 1.5rem;
   }
@@ -46,12 +49,6 @@ p {
   &__right {
     width: 60%;
   }
-  // &__further-details {
-  //   display: flex;
-  //   flex-direction: row;
-  //   justify-content: space-between;
-  //   margin: 1rem 0 0 0;
-  // }
   &__ingredients {
     list-style: none;
   }
