@@ -151,7 +151,8 @@ function AddRecipe() {
   };
 
   return (
-    <article className="add-recipe">
+    <main className="add-recipe">
+      <h1 className="add-recipe__title">Add a new recipe</h1>
       <form className="add-recipe__form" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="title" className="field__label">
@@ -252,17 +253,25 @@ function AddRecipe() {
         {publish.error && (
           <p className="message message--error">{publish.error}</p>
         )}
-        <button className="add-ingredient" onClick={addIngredient}>
-          Add another ingredient
-        </button>
-        <button className="add-instruction" onClick={addInstruction}>
-          Add another instruction
-        </button>
-        <button type="submit" className="add-recipe__submit">
+        <div className="container">
+          <button
+            className="button add-ingredient--btn"
+            onClick={addIngredient}
+          >
+            Add another ingredient
+          </button>
+          <button
+            className="button add-instructon--btn"
+            onClick={addInstruction}
+          >
+            Add another instruction
+          </button>
+        </div>
+        <button type="submit" className="button add-recipe__submit">
           Submit
         </button>
       </form>
-    </article>
+    </main>
   );
 }
 

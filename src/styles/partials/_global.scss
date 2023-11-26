@@ -3,6 +3,7 @@
 @use "./typography" as *;
 @use "./variables" as *;
 
+//Input styling
 .field {
   display: flex;
   flex-direction: column;
@@ -17,6 +18,22 @@
     border-radius: 0.5rem;
     padding: 0.5rem;
     font-size: inherit;
+    color: inherit;
     background-color: $cookd-off-white;
   }
 }
+
+// .button {
+//   margin-top: 1rem;
+//   background-color: $cookd-green;
+//   border: 1px solid $cookd-green;
+//   color: $cookd-cream;
+//   border-radius: 0.5rem;
+//   padding: 0.5rem;
+//   font-size: inherit;
+//   cursor: pointer;
+
+//   &:hover {
+//     background-color: $cookd-dark-green;
+//   }
+// }
