@@ -6,6 +6,7 @@ import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import Cookbook from "../../components/Cookbook/Cookbook";
 import * as mdIcons from "react-icons/md";
 import { IconContext } from "react-icons";
+import DeleteRecipe from "../../components/DeleteRecipe/DeleteRecipe";
 
 function Dashboard() {
   const [failedAuth, setFailedAuth] = useState(false);
@@ -15,26 +16,12 @@ function Dashboard() {
   const [recipes, setRecipes] = useState([]);
   const [isCookbookError, setIsCookbookError] = useState(false);
   const [cookbooks, setCookbooks] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [clickedID, setClickedID] = useState(false);
   const navigate = useNavigate();
 
-  const logout = () => {
-    sessionStorage.removeItem("token");
-    navigate("/login");
-  };
-
-  const login = async () => {
-    const token = sessionStorage.getItem("token");
-    try {
-      const { data } = await axios.get(
-        "http://localhost:5050/api/auth/details",
-        { headers: { Authorization: "Bearer " + token } }
-      );
-      setUserData(data);
-    } catch (error) {
-      console.error(error);
-      setFailedAuth(true);
-    }
-    setIsLoading(false);
+  const handleDeleteClick = () => {
+    setShowDeleteModal(true);
   };
 
   const getDisplayRecipes = async () => {
@@ -44,9 +31,11 @@ function Dashboard() {
       );
       setRecipes(data);
       setIsRecipeError(false);
+      return;
     } catch (error) {
       console.error(error);
       setIsRecipeError(true);
+      return;
     }
   };
 
@@ -57,17 +46,36 @@ function Dashboard() {
       );
       setCookbooks(data);
       setIsCookbookError(false);
+      getDisplayRecipes();
     } catch (error) {
       console.error(error);
       setIsCookbookError(true);
+      return;
     }
+  };
+
+  const login = async () => {
+    const token = sessionStorage.getItem("token");
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5050/api/auth/details",
+        { headers: { Authorization: "Bearer " + token } }
+      );
+      console.log(data);
+      setUserData(data);
+      setIsLoading(false);
+      getCookbooks();
+    } catch (error) {
+      console.error(error);
+      setFailedAuth(true);
+      return;
+    }
+    return;
   };
 
   useEffect(() => {
     login();
-    getCookbooks();
-    getDisplayRecipes();
-  });
+  }, [userData]);
 
   const redirectLogin = () => {
     setTimeout(() => {
@@ -99,13 +107,19 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
-  const seeCookbookDetails = (event) => {
-    navigate("/cookbook");
-  };
+  // const seeCookbookDetails = (event) => {
+  //   navigate("/cookbook");
+  // };
 
   return (
     <IconContext.Provider value={{ color: "#4b6c37" }}>
       <main className="dashboard">
+        {showDeleteModal && (
+          <DeleteRecipe
+            clickedID={clickedID}
+            setShowDeleteModal={setShowDeleteModal}
+          />
+        )}
         <h2 className="dashboard__subtitle">Cookbooks</h2>
         <div className="add-cookbook">
           <Link to={`/user/${userData.id}/cookbooks/add`}>
@@ -114,9 +128,7 @@ function Dashboard() {
         </div>
         <div className="cookbooks">
           {cookbooks.map((cookbook) => {
-            return (
-              <Cookbook cookbook={cookbook} onClick={seeCookbookDetails} />
-            );
+            return <Cookbook cookbook={cookbook} />;
           })}
         </div>
         <h2 className="dashboard__subtitle">Recipes</h2>
@@ -127,7 +139,13 @@ function Dashboard() {
         </div>
         <div className="recipes">
           {recipes.map((recipe) => {
-            return <RecipeCard recipe={recipe} />;
+            return (
+              <RecipeCard
+                recipe={recipe}
+                setClickedID={setClickedID}
+                handleDeleteClick={handleDeleteClick}
+              />
+            );
           })}
         </div>
       </main>
