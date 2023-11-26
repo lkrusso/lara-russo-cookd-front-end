@@ -65,7 +65,10 @@ function DeleteCookbook({ clickedID, setShowDeleteCookbook }) {
           <p className="delete-cookbook__text">
             Please confirm that you’d like to delete the cookbook named "
             {cookbook.name}
-            ". You won’t be able to undo this action.
+            ".
+          </p>
+          <p className="delete-recipe__text">
+            You won’t be able to undo this action.
           </p>
           <div className="btn-container">
             <button className="btn--delete" onClick={handleCancel}>

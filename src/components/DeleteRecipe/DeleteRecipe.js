@@ -65,7 +65,10 @@ function DeleteRecipe({ clickedID, setShowDeleteRecipe }) {
           <p className="delete-recipe__text">
             Please confirm that you’d like to delete the recipe for "
             {recipe.title}
-            ". You won’t be able to undo this action.
+            ".
+          </p>
+          <p className="delete-recipe__text">
+            You won’t be able to undo this action.
           </p>
           <div className="btn-container">
             <button className="btn--delete" onClick={handleCancel}>

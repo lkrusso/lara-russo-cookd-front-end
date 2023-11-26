@@ -161,7 +161,7 @@ function Dashboard() {
               <RecipeCard
                 recipe={recipe}
                 setClickedID={setClickedID}
-                handleDeleteClick={handleDeleteRecipeClick}
+                handleDeleteRecipeClick={handleDeleteRecipeClick}
               />
             );
           })}
