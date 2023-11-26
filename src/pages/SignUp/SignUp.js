@@ -84,7 +84,7 @@ function Signup() {
         {success && <div className="success__message">{success}</div>}
       </form>
 
-      <p>
+      <p className="signup__text">
         Have an account?{" "}
         <Link to="/login" className="login-link">
           Log in
