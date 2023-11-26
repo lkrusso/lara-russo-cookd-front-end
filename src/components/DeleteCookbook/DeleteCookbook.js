@@ -1,42 +1,40 @@
-import "./DeleteRecipe.scss";
 import * as mdIcons from "react-icons/md";
 import { IconContext } from "react-icons";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function DeleteRecipe({ clickedID, setShowDeleteModal }) {
-  const [recipe, setRecipe] = useState([]);
-  const [isRecipeError, setIsRecipeError] = useState(false);
-  const currentRecipeID = clickedID;
+function DeleteCookbook({ clickedID, setShowDeleteModal }) {
+  const [cookbook, setCookbook] = useState([]);
+  const [isCookbookError, setIsCookbookError] = useState(false);
+  const currentCookbookID = clickedID;
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getRecipe = async () => {
+    const getCookbook = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/recipes/${clickedID}`
+          `http://localhost:5050/api/cookbooks/${clickedID}`
         );
-        console.log(data);
-        setIsRecipeError(false);
-        setRecipe(data[0]);
+        setIsCookbookError(false);
+        setCookbook(data[0]);
       } catch (error) {
-        setIsRecipeError(true);
+        setIsCookbookError(true);
         return console.error(error);
       }
     };
-    getRecipe();
+    getCookbook();
   }, []);
 
   const handleDelete = () => {
-    const sendDeleteRecipe = async () => {
+    const sendDeleteCookbook = async () => {
       return await axios.delete(
-        `http://localhost:5050/api/recipes/${currentRecipeID}/delete`
+        `http://localhost:5050/api/cookbooks/${currentCookbookID}/delete`
       );
     };
-    sendDeleteRecipe();
+    sendDeleteCookbook();
     return setTimeout(() => {
-      navigate(`/user/${recipe.user_id}`);
+      navigate(`/users/${cookbook.user_id}`);
     }, 2500);
   };
 
@@ -44,27 +42,27 @@ function DeleteRecipe({ clickedID, setShowDeleteModal }) {
     setShowDeleteModal(false);
   };
 
-  if (isRecipeError) {
-    return <p>Error getting recipe</p>;
+  if (isCookbookError) {
+    return <p>Error getting cookbook</p>;
   }
 
-  if (!recipe) {
+  if (!cookbook) {
     return <p>Loading...</p>;
   }
 
   return (
     <IconContext.Provider value={{ color: "#4b6c37" }}>
-      <div className="delete-recipe__wrapper">
-        <section className="delete-recipe">
-          <div className="delete-recipe__close-icon" onClick={handleCancel}>
+      <div className="delete-cookbook__wrapper">
+        <section className="delete-cookbook">
+          <div className="delete-cookbook__close-icon" onClick={handleCancel}>
             <mdIcons.MdClose />
           </div>
-          <h2 className="delete-recipe__title">
-            Delete recipe for "{recipe.title}"?
+          <h2 className="delete-cookbook__name">
+            Delete cookbook "{cookbook.name}"?
           </h2>
-          <p className="delete-recipe__text">
-            Please confirm that you’d like to delete the recipe for "
-            {recipe.title}
+          <p className="delete-cookbook__text">
+            Please confirm that you’d like to delete the cookbook named "
+            {cookbook.title}
             ". You won’t be able to undo this action.
           </p>
           <div className="btn-container">
@@ -82,4 +80,4 @@ function DeleteRecipe({ clickedID, setShowDeleteModal }) {
   );
 }
 
-export default DeleteRecipe;
+export default DeleteCookbook;
