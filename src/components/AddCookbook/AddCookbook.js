@@ -100,7 +100,8 @@ function AddCookbook() {
     }, 2500);
   };
   return (
-    <article className="add-cookbook">
+    <main className="add-cookbook">
+      <h1 className="add-cookbook__title">Add a new cookbook</h1>
       <form className="add-cookbook__form" onSubmit={handleSubmit}>
         <div className="field">
           <label htmlFor="name" className="field__label">
@@ -116,7 +117,9 @@ function AddCookbook() {
             recipes.map((recipe) => {
               return (
                 <div className="field" key={recipe.id}>
-                  <label>{recipe.title}</label>
+                  <label className="field__label field__label--recipes">
+                    {recipe.title}
+                  </label>
                   <input
                     type="checkbox"
                     id={recipe.id}
@@ -127,17 +130,17 @@ function AddCookbook() {
               );
             })}
         </div>
+        <button type="submit" className="add-cookbook__submit">
+          Submit
+        </button>
         {publish.success && (
           <p className="message message--success">{publish.success}</p>
         )}
         {publish.error && (
           <p className="message message--error">{publish.error}</p>
         )}
-        <button type="submit" className="add-recipe__submit">
-          Submit
-        </button>
       </form>
-    </article>
+    </main>
   );
 }
 
