@@ -53,26 +53,30 @@ function DeleteRecipe({ clickedID, setShowDeleteModal }) {
   }
 
   return (
-    <section className="delete-recipe">
-      <div className="delete-recipe__close-icon" onClick={handleCancel}>
-        <mdIcons.MdClose />
-      </div>
-      <h2 className="delete-recipe__title">Delete recipe "{recipe.title}"?</h2>
-      <p className="delete-recipe__text">
-        Please confirm that you’d like to delete the recipe for "{recipe.title}
-        ". You won’t be able to undo this action.
-      </p>
+    <div className="delete-recipe__wrapper">
+      <section className="delete-recipe">
+        <div className="delete-recipe__close-icon" onClick={handleCancel}>
+          <mdIcons.MdClose />
+        </div>
+        <h2 className="delete-recipe__title">
+          Delete recipe for "{recipe.title}"?
+        </h2>
+        <p className="delete-recipe__text">
+          Please confirm that you’d like to delete the recipe for "
+          {recipe.title}
+          ". You won’t be able to undo this action.
+        </p>
+        <div className="btn-container">
+          <button className="btn--delete" onClick={handleCancel}>
+            Cancel
+          </button>
 
-      <div className="btn-div">
-        <Link className="cancel__link" to={`/user/${recipe.user_id}`}>
-          Cancel
-        </Link>
-
-        <button className="btn btn--delete" onClick={handleDelete}>
-          Delete
-        </button>
-      </div>
-    </section>
+          <button className="btn btn--delete" onClick={handleDelete}>
+            Delete
+          </button>
+        </div>
+      </section>
+    </div>
   );
 }
 
