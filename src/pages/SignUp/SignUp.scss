@@ -51,9 +51,10 @@
   }
 
   &__message {
-    border-left: 5px solid #ddd;
+    border-left: 5px solid $cookd-green;
     padding: 0.75rem;
     margin-top: 2rem;
+    color: $cookd-red;
   }
 }
 
@@ -79,6 +80,7 @@
     border-radius: 0.5rem;
     padding: 0.5rem;
     font-size: inherit;
+    color: inherit;
     background-color: $cookd-off-white;
   }
 }
