@@ -21,7 +21,9 @@ function Cookbook({ cookbook, handleDeleteCookbookClick, setClickedID }) {
             <mdIcons.MdEdit />
           </Link>
         </div>
-        <h3 className="cookbook__title">{cookbook.name}</h3>
+        <Link className="cookbook__title" to={`/cookbooks/${cookbook.id}`}>
+          {cookbook.name}
+        </Link>
       </article>
     </IconContext.Provider>
   );

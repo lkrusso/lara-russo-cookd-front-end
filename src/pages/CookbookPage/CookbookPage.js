@@ -70,6 +70,11 @@ function CookbookPage() {
     getSelectedCookbook();
     getCookbookRecipes();
   }, []);
+
+  if (cookbookDetails.length === 0) {
+    return <p>There are no recipes stored in this cookbook!</p>;
+  }
+
   return (
     <>
       <main className="cookbook__page">

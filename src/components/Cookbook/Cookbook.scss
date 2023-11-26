@@ -12,4 +12,8 @@ p {
   padding: 1rem;
   width: 20rem;
   height: fit-content;
+  &__title {
+    color: black;
+    font-size: 1rem;
+  }
 }
