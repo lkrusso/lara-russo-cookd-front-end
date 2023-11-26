@@ -166,7 +166,7 @@ function EditRecipe() {
       messages["success"] = "Recipe successfully updated!";
       setPublish(messages);
       return setTimeout(() => {
-        navigate("/");
+        navigate(`/user/${updatedRecipeDetails.user_id}`);
       }, 2500);
     } catch (error) {
       console.error(error);
