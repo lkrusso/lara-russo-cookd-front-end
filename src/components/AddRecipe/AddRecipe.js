@@ -36,7 +36,7 @@ function AddRecipe() {
     }
 
     const recipeResponse = {
-      user_id: userID,
+      user_id: parseInt(userID),
       title: form.title.value,
       duration: parseInt(form.duration.value),
       serves: parseInt(form.serves.value),
@@ -104,7 +104,7 @@ function AddRecipe() {
     messages["success"] = "Recipe created successfully!";
     setPublish(messages);
     return setTimeout(() => {
-      navigate("/");
+      navigate(`/user/${userID}`);
     }, 2500);
   };
 

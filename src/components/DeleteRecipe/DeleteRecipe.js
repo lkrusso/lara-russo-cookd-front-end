@@ -31,7 +31,7 @@ function DeleteRecipe({ clickedID, setShowDeleteModal }) {
   const handleDelete = () => {
     const sendDeleteRecipe = async () => {
       return await axios.delete(
-        `http://localhost:5050/api/recipe/${currentRecipeID}`
+        `http://localhost:5050/api/recipes/${currentRecipeID}/delete`
       );
     };
     sendDeleteRecipe();
