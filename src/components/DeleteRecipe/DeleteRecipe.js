@@ -19,7 +19,7 @@ function DeleteRecipe({ clickedID, setShowDeleteModal }) {
         );
         console.log(data);
         setIsRecipeError(false);
-        setRecipe(data);
+        setRecipe(data[0]);
       } catch (error) {
         setIsRecipeError(true);
         return console.error(error);
@@ -40,6 +40,10 @@ function DeleteRecipe({ clickedID, setShowDeleteModal }) {
     }, 2500);
   };
 
+  const handleCancel = () => {
+    setShowDeleteModal(false);
+  };
+
   if (isRecipeError) {
     return <p>Error getting recipe</p>;
   }
@@ -50,22 +54,17 @@ function DeleteRecipe({ clickedID, setShowDeleteModal }) {
 
   return (
     <section className="delete-recipe">
-      <div
-        className="delete-recipe__close-icon"
-        onClick={() => {
-          setTimeout(navigate("/"), 2500);
-        }}
-      >
+      <div className="delete-recipe__close-icon" onClick={handleCancel}>
         <mdIcons.MdClose />
       </div>
       <h2 className="delete-recipe__title">Delete recipe "{recipe.title}"?</h2>
       <p className="delete-recipe__text">
-        Please confirm that you’d like to delete {recipe.title}. You won’t be
-        able to undo this action.
+        Please confirm that you’d like to delete the recipe for "{recipe.title}
+        ". You won’t be able to undo this action.
       </p>
 
       <div className="btn-div">
-        <Link className="cancel__link" to="/">
+        <Link className="cancel__link" to={`/user/${recipe.user_id}`}>
           Cancel
         </Link>
 
