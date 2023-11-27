@@ -14,7 +14,7 @@ function AddCookbook() {
     const getRecipes = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/recipes/users/${userID}`
+          `http://localhost:5050/api/recipes/users/${userID}`
         );
         setRecipes(data);
       } catch (error) {
@@ -49,7 +49,7 @@ function AddCookbook() {
     const sendCookbook = async () => {
       try {
         const { data } = await axios.post(
-          "${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/cookbooks/add",
+          `http://localhost:5050/api/cookbooks/add`,
           cookbookResponse
         );
         currentCookbookID = data[0].id;
@@ -70,7 +70,7 @@ function AddCookbook() {
         const sendRecipes = async () => {
           try {
             await axios.patch(
-              "${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/recipes/update",
+              `http://localhost:5050/api/recipes/update`,
               updateRecipes
             );
             return;

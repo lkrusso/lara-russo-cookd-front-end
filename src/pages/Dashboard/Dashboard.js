@@ -32,7 +32,7 @@ function Dashboard() {
   const getDisplayRecipes = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/recipes/users/nocookbooks/${userID}`
+        `http://localhost:5050/api/recipes/users/nocookbooks/${userID}`
       );
       setRecipes(data);
       return;
@@ -45,7 +45,7 @@ function Dashboard() {
   const getCookbooks = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/cookbooks/users/${userID}`
+        `http://localhost:5050/api/cookbooks/users/${userID}`
       );
       setCookbooks(data);
     } catch (error) {
@@ -58,7 +58,7 @@ function Dashboard() {
     const token = sessionStorage.getItem("token");
     try {
       const { data } = await axios.get(
-        "${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/auth/details",
+        `http://localhost:5050/api/auth/details`,
         { headers: { Authorization: "Bearer " + token } }
       );
       setUserData(data);

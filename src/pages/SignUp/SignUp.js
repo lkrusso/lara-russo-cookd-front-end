@@ -27,13 +27,10 @@ function Signup() {
     }
 
     try {
-      await axios.post(
-        "${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/auth/register",
-        {
-          username: event.target.username.value,
-          password: event.target.password.value,
-        }
-      );
+      await axios.post(`http://localhost:5050/api/auth/register`, {
+        username: event.target.username.value,
+        password: event.target.password.value,
+      });
       setSuccess("Successfully signed up! Redirecting to login page...");
       setTimeout(() => {
         navigate("/login");

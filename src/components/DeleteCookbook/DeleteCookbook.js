@@ -15,7 +15,7 @@ function DeleteCookbook({ clickedID, setShowDeleteCookbook }) {
     const getCookbook = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/cookbooks/${clickedID}`
+          `http://localhost:5050/api/cookbooks/${clickedID}`
         );
         setIsCookbookError(false);
         setCookbook(data[0]);
@@ -30,7 +30,7 @@ function DeleteCookbook({ clickedID, setShowDeleteCookbook }) {
   const handleDelete = () => {
     const sendDeleteCookbook = async () => {
       return await axios.delete(
-        `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/cookbooks/${currentCookbookID}/delete`
+        `http://localhost:5050/api/cookbooks/${currentCookbookID}/delete`
       );
     };
     sendDeleteCookbook();

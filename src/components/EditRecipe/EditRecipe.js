@@ -27,7 +27,7 @@ function EditRecipe() {
     const getRecipe = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/recipes/${id}`
+          `http://localhost:5050/api/recipes/${id}`
         );
         setFields(data[0]);
         return (fieldData = data[0]);
@@ -38,7 +38,7 @@ function EditRecipe() {
     const getIngredients = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/ingredients/${id}`
+          `http://localhost:5050/api/ingredients/${id}`
         );
         setIngredients(data);
         for (let i = 0; i < data.length; i++) {
@@ -54,7 +54,7 @@ function EditRecipe() {
     const getInstructions = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/instructions/${id}`
+          `http://localhost:5050/api/instructions/${id}`
         );
         setInstructions(data);
         for (let i = 0; i < data.length; i++) {
@@ -126,7 +126,7 @@ function EditRecipe() {
 
     try {
       await axios.patch(
-        "${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/ingredients/edit",
+        `http://localhost:5050/api/ingredients/edit`,
         updatedIngredients
       );
     } catch (error) {
@@ -145,7 +145,7 @@ function EditRecipe() {
 
     try {
       await axios.patch(
-        "${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/instructions/edit",
+        `${process.env.REACT_APP_BASE_URL} + ${process.env.REACT_APP_}}/api/instructions/edit`,
         updatedInstructions
       );
     } catch (error) {
@@ -160,7 +160,7 @@ function EditRecipe() {
 
     try {
       await axios.patch(
-        `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/recipes/edit`,
+        `http://localhost:5050/api/recipes/edit`,
         updatedRecipeDetails
       );
       messages["success"] = "Recipe successfully updated!";

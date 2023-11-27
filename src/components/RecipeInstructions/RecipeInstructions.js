@@ -9,7 +9,7 @@ function RecipeInstructions({ recipeID }) {
     const getInstructions = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_BASE_URL}${process.env.SERVER_PORT}/api/instructions/${recipeID}`
+          `http://localhost:5050/api/instructions/${recipeID}`
         );
         setInstructions(data);
         setIsError(false);
