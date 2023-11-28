@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { IconContext } from "react-icons";
 import * as mdIcons from "react-icons/md";
+import Checkbox from "../Checkbox/Checkbox";
 
 function EditCookbook() {
   const userID = sessionStorage.getItem("id");
@@ -34,9 +35,21 @@ function EditCookbook() {
         );
         console.log(data);
         setRecipes(data);
+        setFields({ ...fields, recipes });
       } catch (error) {
         console.error(error);
       }
+
+      recipes.forEach((recipe) => {
+        if (
+          recipe.cookbook_id === null ||
+          recipe.cookbook_id === parseInt(id)
+        ) {
+          recipe.checked = true;
+        } else {
+          recipe.checked = false;
+        }
+      });
     };
 
     getCookbook().then(getRecipes);
@@ -55,15 +68,8 @@ function EditCookbook() {
 
   const updateFields = (event) => {
     const currentField = event.target;
-    console.log(currentField);
-    console.log(currentField.type);
-    if (currentField.type === "checkbox") {
-      setFields({ ...fields, [currentField.name]: !currentField.checked });
-      console.log(currentField);
-    } else {
-      checkField(currentField);
-      setFields({ ...fields, [currentField.name]: currentField.value });
-    }
+    checkField(currentField);
+    setFields({ ...fields, [currentField.name]: currentField.value });
     return;
   };
 
@@ -79,12 +85,6 @@ function EditCookbook() {
     // end loop
 
     // create updated cookbook {id: id, name: updatedName, checkedRecipes: updatedCheckList, unCheckedRecipes: updatedUnCheckList}
-  };
-
-  const handleCheckboxClick = (event) => {
-    console.log(event.target);
-    if (event.target.checked) {
-    }
   };
 
   return (
@@ -120,13 +120,12 @@ function EditCookbook() {
                   <label htmlFor="recipe" className="field__label">
                     {recipe.title}
                   </label>
-                  <input
-                    type="checkbox"
-                    className="field__checkbox"
+                  <Checkbox
+                    type={"checkbox"}
+                    className={"field_checkbox"}
                     name={`recipe${recipe.id}`}
                     id={recipe.id}
-                    checked={recipe.cookbook_id === parseInt(id) ? true : false}
-                    onChange={updateFields}
+                    checkedStatus={recipe.cookbook_id === parseInt(id)}
                   />
                 </div>
               );
