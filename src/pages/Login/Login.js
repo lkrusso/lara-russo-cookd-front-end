@@ -24,6 +24,7 @@ function Login() {
           password: form.password.value,
         }
       );
+      console.log(response);
       sessionStorage.setItem("token", response.data.token);
       navigate(`/user/${response.data.id}`);
     } catch (error) {

@@ -1,6 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import RecipeCard from "./components/RecipeCard/RecipeCard";
-import Cookbook from "./components/Cookbook/Cookbook";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard/Dashboard";
@@ -11,6 +10,7 @@ import NavBar from "./components/NavBar/NavBar";
 import "./App.scss";
 import CookbookPage from "./pages/CookbookPage/CookbookPage";
 import NotFound from "./pages/NotFound/NotFound";
+import EditCookbook from "./components/EditCookbook/EditCookbook";
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
           <Route path="/user/:userID/recipes/add" element={<AddRecipe />} />
           <Route path="/cookbooks/:id" element={<CookbookPage />} />
           <Route path="/user/:userID/cookbooks/add" element={<AddCookbook />} />
+          <Route path="/cookbooks/:id/edit" element={<EditCookbook />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
