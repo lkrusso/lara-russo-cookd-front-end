@@ -151,7 +151,6 @@ function EditRecipe() {
     } catch (error) {
       console.error(error);
     }
-    console.log(recipeArray);
     recipeArray.forEach(([key, value]) => {
       updatedRecipeDetails[key] = value;
     });

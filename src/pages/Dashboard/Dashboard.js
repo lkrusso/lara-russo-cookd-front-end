@@ -10,7 +10,7 @@ import DeleteRecipe from "../../components/DeleteRecipe/DeleteRecipe";
 import DeleteCookbook from "../../components/DeleteCookbook/DeleteCookbook";
 
 function Dashboard() {
-  let { userID } = useParams();
+  const userID = sessionStorage.getItem("id");
   const [failedAuth, setFailedAuth] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState(null);

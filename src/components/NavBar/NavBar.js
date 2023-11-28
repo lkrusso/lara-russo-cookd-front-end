@@ -6,6 +6,7 @@ import { IconContext } from "react-icons";
 import logo from "../../assets/logo.png";
 
 function NavBar() {
+  const userID = sessionStorage.getItem("id");
   const [sidebar, setSidebar] = useState(false);
   const navigate = useNavigate();
 
@@ -49,7 +50,7 @@ function NavBar() {
             </li>
 
             <li className="nav-text" onClick={showSidebar}>
-              <Link to="*">
+              <Link to={`/user/${userID}`}>
                 <mdIcons.MdRestaurantMenu />
                 <span>Recipes</span>
               </Link>

@@ -6,6 +6,12 @@ p {
   padding: 0;
 }
 
+.recipe-card__delete {
+  &:hover {
+    background-color: $cookd-cream;
+  }
+}
+
 .recipe-card {
   margin-bottom: 2rem;
   font-size: 0.75rem;

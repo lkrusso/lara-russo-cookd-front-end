@@ -1,0 +1,79 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/global" as *;
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.edit {
+  margin-bottom: 1rem;
+  &__label {
+    font-size: 1rem;
+    width: fit-content;
+  }
+  &__input {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-size: inherit;
+    color: inherit;
+    background-color: $cookd-off-white;
+  }
+}
+
+.edit-cookbook {
+  color: $cookd-dark-green;
+  position: relative;
+  left: 0rem;
+  bottom: -2rem;
+  padding: 0 1rem 0.5rem 1rem;
+  overflow: scroll;
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+  }
+  &__title {
+    font-size: 2rem;
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  &__submit {
+    margin: 1rem;
+    width: 90%;
+  }
+  &__back {
+    width: fit-content;
+  }
+}
+
+.message {
+  font-weight: bold;
+  text-align: center;
+  &--error {
+    color: $cookd-red;
+  }
+  &--success {
+    color: $cookd-dark-green;
+  }
+}
+
+.update-btn {
+  width: 100%;
+  margin-top: 1rem;
+  background-color: $cookd-green;
+  border: 1px solid $cookd-green;
+  color: $cookd-cream;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $cookd-dark-green;
+  }
+}
