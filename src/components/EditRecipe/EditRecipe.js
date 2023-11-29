@@ -122,7 +122,6 @@ function EditRecipe() {
       ingredient.recipe_id = id;
       updatedIngredients.push(ingredient);
     });
-    console.log(updatedIngredients);
 
     try {
       await axios.patch(

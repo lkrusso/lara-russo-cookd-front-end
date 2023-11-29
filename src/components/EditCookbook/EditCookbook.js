@@ -9,7 +9,8 @@ import Checkbox from "../Checkbox/Checkbox";
 function EditCookbook() {
   const userID = sessionStorage.getItem("id");
   let { id } = useParams();
-  const recipeList = [];
+  //const recipeList = [];
+  const navigate = useNavigate();
   let updatedDeselectedRecipes = [];
   let updatedSelectedRecipes = [];
   const [recipes, setRecipes] = useState([]);
@@ -62,7 +63,7 @@ function EditCookbook() {
     return;
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const messages = {};
     const form = event.target;
@@ -70,13 +71,15 @@ function EditCookbook() {
     recipes.forEach((recipe) => {
       let currentRecipe = form[`recipe${recipe.id}`];
       if (currentRecipe.checked) {
+        delete recipe.date_created;
+        delete recipe.date_last_cooked;
         updatedSelectedRecipes.push(recipe);
       } else {
+        delete recipe.date_created;
+        delete recipe.date_last_cooked;
         updatedDeselectedRecipes.push(recipe);
       }
     });
-    console.log(updatedSelectedRecipes);
-    console.log(updatedDeselectedRecipes);
 
     const updatedCookbook = {
       id: id,
@@ -84,9 +87,23 @@ function EditCookbook() {
       checkedRecipes: updatedSelectedRecipes,
       unCheckedRecipes: updatedDeselectedRecipes,
     };
-    console.log(updatedCookbook);
 
-    // create updated cookbook {id: id, name: updatedName, checkedRecipes: updatedCheckList, unCheckedRecipes: updatedUnCheckList}
+    try {
+      await axios.patch(
+        `http://localhost:5050/api/cookbooks/${id}/edit`,
+        updatedCookbook
+      );
+      messages["success"] = "Cookbook successfully updated";
+      setPublish(messages);
+      return setTimeout(() => {
+        navigate(`/user/${userID}`);
+      }, 2500);
+    } catch (error) {
+      console.error(error);
+      messages["error"] = "Unable to update the cookbook";
+      setPublish(messages);
+      return;
+    }
   };
 
   return (
