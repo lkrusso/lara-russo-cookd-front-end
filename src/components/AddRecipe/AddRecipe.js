@@ -1,10 +1,12 @@
 import "./AddRecipe.scss";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { IconContext } from "react-icons";
+import * as mdIcons from "react-icons/md";
 
 function AddRecipe() {
-  let { userID } = useParams();
+  const userID = sessionStorage.getItem("id");
   let currentRecipeID = "";
   const navigate = useNavigate();
   const [publish, setPublish] = useState({});
@@ -157,127 +159,141 @@ function AddRecipe() {
   };
 
   return (
-    <main className="add-recipe">
-      <h1 className="add-recipe__title">Add a new recipe</h1>
-      <form className="add-recipe__form" onSubmit={handleSubmit}>
-        <div className="field">
-          <label htmlFor="title" className="field__label">
-            Recipe title
-          </label>
-          <input type="text" id="title" name="title" className="field__input" />
+    <IconContext.Provider value={{ color: "#4b6c37", size: 30 }}>
+      <main className="add-recipe">
+        <div className="add-recipe__header">
+          <div className="add-recipe__back">
+            <Link to={`/user/${userID}`}>
+              <mdIcons.MdArrowBack />
+            </Link>
+          </div>
+          <h1 className="add-recipe__title">Add Recipe</h1>
         </div>
-        <div className="field">
-          <label htmlFor="duration" className="field__label">
-            Duration in minutes
-          </label>
-          <input
-            type="text"
-            id="duration"
-            name="duration"
-            className="field__input"
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="serves" className="field__label">
-            Serves
-          </label>
-          <input
-            type="text"
-            id="serves"
-            name="serves"
-            className="field__input"
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="cuisine_type" className="field__label">
-            Type
-          </label>
-          <input
-            type="text"
-            id="cuisine_type"
-            name="cuisine_type"
-            className="field__input"
-          />
-        </div>
-        <div className="field">
-          <label htmlFor="ingredient1" className="field__label">
-            Ingredient
-          </label>
-          <input
-            type="text"
-            id="ingredient"
-            name="ingredient"
-            className="field__input"
-          />
-        </div>
-        {addIngredientField.map((input, index) => {
-          return (
-            <div className="field" key={index}>
-              <label htmlFor={input.htmlFor} className="field__label">
-                Ingredient {index + 2}
-              </label>
-              <input
-                type="text"
-                id={input.id}
-                name={input.name}
-                className="field__input"
-                onChange={updateIngredientField}
-              />
-            </div>
-          );
-        })}
-        <div className="field">
-          <label htmlFor="instruction" className="field__label">
-            Instruction
-          </label>
-          <input
-            type="text"
-            id="instruction"
-            name="instruction"
-            className="field__input"
-          />
-        </div>
-        {addInstructionField.map((input, index) => {
-          return (
-            <div className="field" key={index}>
-              <label htmlFor={input.htmlFor} className="field__label">
-                Instruction {index + 1}
-              </label>
-              <input
-                type="text"
-                id={input.id}
-                name={input.name}
-                className="field__input"
-                onChange={updateInstructionField}
-              />
-            </div>
-          );
-        })}
-        {publish.success && (
-          <p className="message message--success">{publish.success}</p>
-        )}
-        {publish.error && (
-          <p className="message message--error">{publish.error}</p>
-        )}
-        <div className="container">
-          <button
-            className="button add-ingredient--btn"
-            onClick={addIngredient}
-          >
-            Add another ingredient
+        <form className="add-recipe__form" onSubmit={handleSubmit}>
+          <div className="field">
+            <label htmlFor="title" className="field__label">
+              Recipe title
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              className="field__input"
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="duration" className="field__label">
+              Duration in minutes
+            </label>
+            <input
+              type="text"
+              id="duration"
+              name="duration"
+              className="field__input"
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="serves" className="field__label">
+              Serves
+            </label>
+            <input
+              type="text"
+              id="serves"
+              name="serves"
+              className="field__input"
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="cuisine_type" className="field__label">
+              Type
+            </label>
+            <input
+              type="text"
+              id="cuisine_type"
+              name="cuisine_type"
+              className="field__input"
+            />
+          </div>
+          <div className="field">
+            <label htmlFor="ingredient1" className="field__label">
+              Ingredient
+            </label>
+            <input
+              type="text"
+              id="ingredient"
+              name="ingredient"
+              className="field__input"
+            />
+          </div>
+          {addIngredientField.map((input, index) => {
+            return (
+              <div className="field" key={index}>
+                <label htmlFor={input.htmlFor} className="field__label">
+                  Ingredient {index + 2}
+                </label>
+                <input
+                  type="text"
+                  id={input.id}
+                  name={input.name}
+                  className="field__input"
+                  onChange={updateIngredientField}
+                />
+              </div>
+            );
+          })}
+          <div className="field">
+            <label htmlFor="instruction" className="field__label">
+              Instruction
+            </label>
+            <input
+              type="text"
+              id="instruction"
+              name="instruction"
+              className="field__input"
+            />
+          </div>
+          {addInstructionField.map((input, index) => {
+            return (
+              <div className="field" key={index}>
+                <label htmlFor={input.htmlFor} className="field__label">
+                  Instruction {index + 1}
+                </label>
+                <input
+                  type="text"
+                  id={input.id}
+                  name={input.name}
+                  className="field__input"
+                  onChange={updateInstructionField}
+                />
+              </div>
+            );
+          })}
+          {publish.success && (
+            <p className="message message--success">{publish.success}</p>
+          )}
+          {publish.error && (
+            <p className="message message--error">{publish.error}</p>
+          )}
+          <div className="container">
+            <button
+              className="button add-ingredient--btn"
+              onClick={addIngredient}
+            >
+              Add another ingredient
+            </button>
+            <button
+              className="button add-instructon--btn"
+              onClick={addInstruction}
+            >
+              Add another instruction
+            </button>
+          </div>
+          <button type="submit" className="button add-recipe__submit">
+            Submit
           </button>
-          <button
-            className="button add-instructon--btn"
-            onClick={addInstruction}
-          >
-            Add another instruction
-          </button>
-        </div>
-        <button type="submit" className="button add-recipe__submit">
-          Submit
-        </button>
-      </form>
-    </main>
+        </form>
+      </main>
+    </IconContext.Provider>
   );
 }
 

@@ -9,7 +9,6 @@ import Checkbox from "../Checkbox/Checkbox";
 function EditCookbook() {
   const userID = sessionStorage.getItem("id");
   let { id } = useParams();
-  //const recipeList = [];
   const navigate = useNavigate();
   let updatedDeselectedRecipes = [];
   let updatedSelectedRecipes = [];
@@ -111,7 +110,7 @@ function EditCookbook() {
       <section className="edit-cookbook">
         <div className="edit-cookbook__header">
           <div className="edit-cookbook__back">
-            <Link to={`/user/${fields.user_id}`}>
+            <Link to={`/user/${userID}`}>
               <mdIcons.MdArrowBack />
             </Link>
           </div>
