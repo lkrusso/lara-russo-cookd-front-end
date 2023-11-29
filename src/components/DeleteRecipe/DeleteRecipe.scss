@@ -19,7 +19,7 @@
 
 .delete-recipe {
   color: $cookd-dark-green;
-  z-index: 10;
+  z-index: 15;
   position: relative;
   margin: 50% auto;
   background-color: $cookd-off-white;
@@ -49,6 +49,7 @@
     background-color: rgba(75, 108, 55, 0.5);
     height: 100%;
     width: 100%;
+    z-index: 20;
   }
 }
 

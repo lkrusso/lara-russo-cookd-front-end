@@ -10,8 +10,9 @@ function EditCookbook() {
   const userID = sessionStorage.getItem("id");
   let { id } = useParams();
   const recipeList = [];
+  let updatedDeselectedRecipes = [];
+  let updatedSelectedRecipes = [];
   const [recipes, setRecipes] = useState([]);
-  const [nonCookbooksResponse, setNonCookbooksResponse] = useState([]);
   const [fields, setFields] = useState({});
   const [errors, setErrors] = useState({ title: "", recipe: "" });
   const [publish, setPublish] = useState({});
@@ -33,23 +34,11 @@ function EditCookbook() {
         const { data } = await axios.get(
           `http://localhost:5050/api/recipes/users/${userID}`
         );
-        console.log(data);
         setRecipes(data);
         setFields({ ...fields, recipes });
       } catch (error) {
         console.error(error);
       }
-
-      recipes.forEach((recipe) => {
-        if (
-          recipe.cookbook_id === null ||
-          recipe.cookbook_id === parseInt(id)
-        ) {
-          recipe.checked = true;
-        } else {
-          recipe.checked = false;
-        }
-      });
     };
 
     getCookbook().then(getRecipes);
@@ -76,13 +65,26 @@ function EditCookbook() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const messages = {};
-    // check all the checkbox fields
-    // if the checkbox is checked
-    // updatedCheckedList.push(recipe)
-    // else
-    // updatedUnCheckedList.push(recipe)
-    // endif
-    // end loop
+    const form = event.target;
+    console.log(form);
+    recipes.forEach((recipe) => {
+      let currentRecipe = form[`recipe${recipe.id}`];
+      if (currentRecipe.checked) {
+        updatedSelectedRecipes.push(recipe);
+      } else {
+        updatedDeselectedRecipes.push(recipe);
+      }
+    });
+    console.log(updatedSelectedRecipes);
+    console.log(updatedDeselectedRecipes);
+
+    const updatedCookbook = {
+      id: id,
+      name: form.name.value,
+      checkedRecipes: updatedSelectedRecipes,
+      unCheckedRecipes: updatedDeselectedRecipes,
+    };
+    console.log(updatedCookbook);
 
     // create updated cookbook {id: id, name: updatedName, checkedRecipes: updatedCheckList, unCheckedRecipes: updatedUnCheckList}
   };
