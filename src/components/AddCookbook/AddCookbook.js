@@ -29,11 +29,18 @@ function AddCookbook() {
 
   if (!recipes) {
     return (
-      <>
-        <p>
-          No recipes to store into the cookbook! Please make a recipe first!
-        </p>
-      </>
+      <div className="add-cookbook__header">
+        <IconContext.Provider value={{ color: "#4b6c37", size: 30 }}>
+          <div className="add-cookbook__back">
+            <Link to={`/user/${userID}`}>
+              <mdIcons.MdArrowBack />
+            </Link>
+          </div>
+          <p className="add-cookbook__title">
+            No recipes to store into the cookbook! Please make a recipe first!
+          </p>
+        </IconContext.Provider>
+      </div>
     );
   }
 
@@ -105,10 +112,10 @@ function AddCookbook() {
 
     sendCookbook();
 
-    messages["success"] = "Recipe created successfully!";
+    messages["success"] = "Cookbook created successfully!";
     setPublish(messages);
     return setTimeout(() => {
-      navigate("/");
+      navigate(`/user/${userID}`);
     }, 2500);
   };
   return (
