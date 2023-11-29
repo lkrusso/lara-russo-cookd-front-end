@@ -11,6 +11,7 @@ import "./App.scss";
 import CookbookPage from "./pages/CookbookPage/CookbookPage";
 import NotFound from "./pages/NotFound/NotFound";
 import EditCookbook from "./components/EditCookbook/EditCookbook";
+import DevelopmentPage from "./pages/DevelopmentPage/DevelopmentPage";
 
 function App() {
   return (
@@ -18,15 +19,17 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/user/:userID" element={<Dashboard />} />
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/user/:userID" element={<Dashboard />} />
           <Route path="/recipes/:id" element={<RecipeCard />} />
           <Route path="/recipes/:id/edit" element={<EditRecipe />} />
           <Route path="/user/:userID/recipes/add" element={<AddRecipe />} />
           <Route path="/cookbooks/:id" element={<CookbookPage />} />
           <Route path="/user/:userID/cookbooks/add" element={<AddCookbook />} />
           <Route path="/cookbooks/:id/edit" element={<EditCookbook />} />
+          <Route path="/workinprogress" element={<DevelopmentPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
