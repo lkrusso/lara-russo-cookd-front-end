@@ -93,7 +93,7 @@ function EditCookbook() {
         `http://localhost:5050/api/cookbooks/${id}/edit`,
         updatedCookbook
       );
-      messages["success"] = "Cookbook successfully updated";
+      messages["success"] = "Cookbook successfully updated!";
       setPublish(messages);
       return setTimeout(() => {
         navigate(`/user/${userID}`);
@@ -132,7 +132,7 @@ function EditCookbook() {
                 value={fields.name}
               />
             </div>
-            <p className="error-message">{errors.name}</p>
+            <p className="message--error">{errors.name}</p>
             {recipes.map((recipe) => {
               return (
                 <div className="field" key={recipe.id}>
