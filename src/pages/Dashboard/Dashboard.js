@@ -1,7 +1,7 @@
 import "./Dashboard.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import Cookbook from "../../components/Cookbook/Cookbook";
 import * as mdIcons from "react-icons/md";
@@ -32,7 +32,7 @@ function Dashboard() {
   const getDisplayRecipes = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5050/api/recipes/users/nocookbooks/${userID}`
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/recipes/users/nocookbooks/${userID}`
       );
       setRecipes(data);
       return;
@@ -45,7 +45,7 @@ function Dashboard() {
   const getCookbooks = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5050/api/cookbooks/users/${userID}`
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/cookbooks/users/${userID}`
       );
       setCookbooks(data);
     } catch (error) {
@@ -58,7 +58,7 @@ function Dashboard() {
     const token = sessionStorage.getItem("token");
     try {
       const { data } = await axios.get(
-        `http://localhost:5050/api/auth/details`,
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/auth/details`,
         { headers: { Authorization: "Bearer " + token } }
       );
       setUserData(data);
@@ -72,9 +72,7 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    login();
-    getCookbooks();
-    getDisplayRecipes();
+    login().then(getCookbooks).then(getDisplayRecipes);
   }, []);
 
   const redirectLogin = () => {

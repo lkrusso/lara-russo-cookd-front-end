@@ -18,7 +18,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        `http://localhost:5050/api/auth/login`,
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/auth/login`,
         {
           username: form.username.value,
           password: form.password.value,
@@ -29,7 +29,7 @@ function Login() {
       navigate(`/user/${response.data.id}`);
     } catch (error) {
       console.error(error);
-      setError(error.response.data);
+      setError(error.message);
     }
   };
 

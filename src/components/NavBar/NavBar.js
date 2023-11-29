@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.scss";
 import { useState } from "react";
 import * as mdIcons from "react-icons/md";
@@ -57,7 +57,7 @@ function NavBar() {
             </li>
 
             <li className="nav-text" onClick={showSidebar}>
-              <Link to="*">
+              <Link to="/workinprogress">
                 <mdIcons.MdMenuBook />
                 <span>Menu board</span>
               </Link>

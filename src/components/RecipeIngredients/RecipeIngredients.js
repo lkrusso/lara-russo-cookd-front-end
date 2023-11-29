@@ -9,7 +9,7 @@ function RecipeIngredients({ recipeID }) {
     const getIngredients = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/ingredients/${recipeID}`
+          `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/ingredients/${recipeID}`
         );
         setIngredients(data);
         setIsError(false);

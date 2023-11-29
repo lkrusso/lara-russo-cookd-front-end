@@ -45,7 +45,7 @@ function AddRecipe() {
 
     const sendRecipe = async () => {
       const { data } = await axios.post(
-        `http://localhost:5050/api/recipes/add`,
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/recipes/add`,
         recipeResponse
       );
       currentRecipeID = data[0].id;
@@ -76,10 +76,13 @@ function AddRecipe() {
     }
 
     const sendIngredients = async () => {
-      await axios.post(`http://localhost:5050/api/ingredients/add`, {
-        ingredientList: ingredientList,
-        recipe_id: currentRecipeID,
-      });
+      await axios.post(
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/ingredients/add`,
+        {
+          ingredientList: ingredientList,
+          recipe_id: currentRecipeID,
+        }
+      );
     };
 
     instructionList = [{ instruction: form.instruction.value }];
@@ -91,10 +94,13 @@ function AddRecipe() {
     }
 
     const sendInstructions = async () => {
-      await axios.post(`http://localhost:5050/api/instructions/add`, {
-        instructionList: instructionList,
-        recipe_id: currentRecipeID,
-      });
+      await axios.post(
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/instructions/add`,
+        {
+          instructionList: instructionList,
+          recipe_id: currentRecipeID,
+        }
+      );
     };
 
     sendRecipe().then(sendIngredients).then(sendInstructions);

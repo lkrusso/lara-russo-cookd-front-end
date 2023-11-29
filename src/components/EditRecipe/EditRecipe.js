@@ -27,7 +27,7 @@ function EditRecipe() {
     const getRecipe = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/recipes/${id}`
+          `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/recipes/${id}`
         );
         setFields(data[0]);
         return (fieldData = data[0]);
@@ -38,7 +38,7 @@ function EditRecipe() {
     const getIngredients = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/ingredients/${id}`
+          `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/ingredients/${id}`
         );
         setIngredients(data);
         for (let i = 0; i < data.length; i++) {
@@ -54,7 +54,7 @@ function EditRecipe() {
     const getInstructions = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/instructions/${id}`
+          `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/instructions/${id}`
         );
         setInstructions(data);
         for (let i = 0; i < data.length; i++) {
@@ -125,7 +125,7 @@ function EditRecipe() {
 
     try {
       await axios.patch(
-        `http://localhost:5050/api/ingredients/edit`,
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/ingredients/edit`,
         updatedIngredients
       );
     } catch (error) {
@@ -158,7 +158,7 @@ function EditRecipe() {
 
     try {
       await axios.patch(
-        `http://localhost:5050/api/recipes/edit`,
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/recipes/edit`,
         updatedRecipeDetails
       );
       messages["success"] = "Recipe successfully updated!";
