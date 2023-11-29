@@ -21,7 +21,7 @@ function EditCookbook() {
     const getCookbook = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/cookbooks/${id}`
+          `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/cookbooks/${id}`
         );
         setFields(data[0]);
       } catch (error) {
@@ -32,7 +32,7 @@ function EditCookbook() {
     const getRecipes = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5050/api/recipes/users/${userID}`
+          `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/recipes/users/${userID}`
         );
         setRecipes(data);
         setFields({ ...fields, recipes });
@@ -89,7 +89,7 @@ function EditCookbook() {
 
     try {
       await axios.patch(
-        `http://localhost:5050/api/cookbooks/${id}/edit`,
+        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/cookbooks/${id}/edit`,
         updatedCookbook
       );
       messages["success"] = "Cookbook successfully updated!";

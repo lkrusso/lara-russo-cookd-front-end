@@ -61,7 +61,7 @@ function AddCookbook() {
     }
 
     const cookbookResponse = {
-      user_id: userID,
+      user_id: parseInt(userID),
       name: form.name.value,
     };
 
