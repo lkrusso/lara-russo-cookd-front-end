@@ -31,9 +31,9 @@ function NavBar() {
           <div className="menu-bars" onClick={showSidebar}>
             <mdIcons.MdMenu />
           </div>
-          <div className="logo-container">
-            <img className="logo" src={logo} alt="Cookd logo" />
-          </div>
+          {/* <div className="logo-container"> */}
+          <img className="logo" src={logo} alt="Cookd logo" />
+          {/* </div> */}
         </div>
         <nav
           className={

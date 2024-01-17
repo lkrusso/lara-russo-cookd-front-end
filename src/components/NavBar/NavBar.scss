@@ -71,6 +71,5 @@ span {
 
 .logo {
   width: 10rem;
-  position: relative;
-  left: 4rem;
+  margin: 0 calc((100% - 15rem) / 2);
 }
