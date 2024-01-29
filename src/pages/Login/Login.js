@@ -17,8 +17,15 @@ function Login() {
     }
 
     try {
+      // const response = await axios.post(
+      //   `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/auth/login`,
+      //   {
+      //     username: form.username.value,
+      //     password: form.password.value,
+      //   }
+      // );
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}:${process.env.REACT_APP_SERVER_PORT}/api/auth/login`,
+        `http://localhost:5050/api/auth/login`,
         {
           username: form.username.value,
           password: form.password.value,
